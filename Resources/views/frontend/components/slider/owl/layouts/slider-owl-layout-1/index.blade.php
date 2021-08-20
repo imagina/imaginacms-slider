@@ -30,9 +30,7 @@
                                            imgClasses="d-block h-100 slider-img__{{$imgObjectFit}}"
                                            width="100%"
                                            :mediaFiles="$slide->mediaFiles()" zone="slideimage"/>
-                    @else
-                        <iframe class="full-height" width="100%" height="{{$height}}" src="{{ $slide->getLinkUrl() }}"
-                                frameborder="0" allowfullscreen></iframe>
+                    
                     @endif
                     @if(!empty($slide->title) || !empty($slide->caption) || !empty($slide->custom_html))
                         <div class="carousel-caption px-o pb-0 d-none d-md-block h-100">
