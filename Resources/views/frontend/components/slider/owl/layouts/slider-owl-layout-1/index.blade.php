@@ -1,3 +1,5 @@
+<x-isite::edit-link link="/iadmin/#/slider/index?edit={{$slider->id}}"
+                    :tooltip="trans('slider::slider.editLink.tooltipSlider')"/>
 <div id="{{ $slider->system_name }}"
      class="owl-carousel slider-component owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}"
      style="max-height: {{ $height }}">
