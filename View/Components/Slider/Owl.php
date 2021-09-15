@@ -57,7 +57,7 @@ class Owl extends Component
         $this->responsive = json_encode($responsive ?? [0 => ["items" =>  1]]);
         $this->responsiveClass = $responsiveClass;
         $this->orderClasses = !empty($orderClasses) ? $orderClasses : ["photo" => "order-0", "content" => "order-1"];
-        list($this->editLink, $this->tooltipEditLink) = getEditLink($this->repository);
+        list($this->editLink, $this->tooltipEditLink) = getEditLink('Modules\Slider\Repositories\SlideRepository');
 
 
         $this->view = "slider::frontend.components.slider.owl.layouts.{$this->layout}.index";
