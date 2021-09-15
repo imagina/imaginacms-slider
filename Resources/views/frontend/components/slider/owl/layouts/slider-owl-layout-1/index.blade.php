@@ -1,5 +1,3 @@
-<x-isite::edit-link link="/iadmin/#/slider/index?edit={{$slider->id}}"
-                    :tooltip="trans('slider::slider.editLink.tooltipSlider')"/>
 <div id="{{ $slider->system_name }}"
      class="owl-carousel slider-component owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}"
      style="max-height: {{ $height }}">
@@ -39,18 +37,19 @@
             <div class="container h-100">
               <div class="row h-100 justify-content-center">
                 <div class="col-10 text-center">
-
                   @if(!empty($slide->title))
-                    <h1 class="title1 mb-2 h1">
-                      <a href="{{ $slide->url ?? $slide->uri }}">
-                      <b>{{$slide->title}}</b>
-                      </a>
-                    </h1>
+                    <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                                        tooltip="{{$tooltipEditLink}}"/>
+                    <a href="{{ $slide->url ?? $slide->uri }}">
+                      <h1 class="title1 mb-2 h1">
+                        <b>{{$slide->title}}</b>
+                      </h1>
+                    </a>
                   @endif
 
                   @if(!empty($slide->custom_html))
                     <div class="custom-html d-none d-md-block">
-                        {!! $slide->custom_html !!}
+                      {!! $slide->custom_html !!}
                     </div>
                   @endif
 
