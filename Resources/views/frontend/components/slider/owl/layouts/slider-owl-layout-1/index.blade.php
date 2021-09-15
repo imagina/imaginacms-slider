@@ -41,14 +41,16 @@
                 <div class="col-10 text-center">
 
                   @if(!empty($slide->title))
-                    <h1 class="title1 mb-2 h1"><b>{{$slide->title}}</b></h1>
+                    <h1 class="title1 mb-2 h1">
+                      <a href="{{ $slide->url ?? $slide->uri }}">
+                      <b>{{$slide->title}}</b>
+                      </a>
+                    </h1>
                   @endif
 
                   @if(!empty($slide->custom_html))
                     <div class="custom-html d-none d-md-block">
-                      <a href="{{ $slide->url ?? $slide->uri }}">
                         {!! $slide->custom_html !!}
-                      </a>
                     </div>
                   @endif
 
