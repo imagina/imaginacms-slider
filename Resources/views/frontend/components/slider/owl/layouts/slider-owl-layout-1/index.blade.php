@@ -3,6 +3,9 @@
      style="max-height: {{ $height }}">
   @foreach($slider->slides as $index => $slide)
 
+    <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                        tooltip="{{$tooltipEditLink}}"/>
+
     @switch($slide->type)
 
       @case("video")
@@ -38,8 +41,6 @@
               <div class="row h-100 justify-content-center">
                 <div class="col-10 text-center">
                   @if(!empty($slide->title))
-                    <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
-                                        tooltip="{{$tooltipEditLink}}"/>
                     <a href="{{ $slide->url ?? $slide->uri }}">
                       <h1 class="title1 mb-2 h1">
                         <b>{{$slide->title}}</b>
