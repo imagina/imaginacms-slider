@@ -2,7 +2,7 @@
      class="owl-carousel slider-component owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}"
      style="max-height: {{ $height }}">
   @foreach($slider->slides as $index => $slide)
-
+    
     @switch($slide->type)
 
       @case("video")
