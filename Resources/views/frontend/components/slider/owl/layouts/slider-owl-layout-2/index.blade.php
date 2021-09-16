@@ -1,9 +1,10 @@
 <div id="{{ $slider->system_name }}"
      class="owl-carousel owl-theme owl-slider-layout-2 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}">
   @foreach($slider->slides as $index => $slide)
-    <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
-                        tooltip="{{$tooltipEditLink}}"/>
+
     <div class="card border-0">
+      <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                          tooltip="{{$tooltipEditLink}}"/>
       <div class="row no-gutters">
         <div class="col-lg-6 ">
           <div class="h-100 position-relative">
