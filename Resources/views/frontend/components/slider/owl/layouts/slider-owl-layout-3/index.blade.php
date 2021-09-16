@@ -1,6 +1,8 @@
 <div id="{{ $slider->system_name }}"
      class="owl-carousel owl-theme owl-slider-layout-3 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}">
   @foreach($slider->slides as $index => $slide)
+    <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                        tooltip="{{$tooltipEditLink}}"/>
     <div class="card-owl">
       <div class="bg-image">
         <x-media::single-image :alt="$slide->title ?? Setting::get('core::site-name')"
@@ -13,8 +15,6 @@
       @if(!empty($slide->title) || !empty($slide->caption) || !empty($slide->custom_html))
         <div class="card-owl-body">
           @if(!empty($slide->title))
-            <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
-                                tooltip="{{$tooltipEditLink}}"/>
             <a href="{{ $slide->url ?? $slide->uri }}">
               <h3 class="title h1">
                 {{$slide->title}}
