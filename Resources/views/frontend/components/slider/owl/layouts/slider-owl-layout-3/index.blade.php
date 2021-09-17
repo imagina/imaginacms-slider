@@ -1,7 +1,7 @@
 <div id="{{ $slider->system_name }}"
      class="owl-carousel owl-theme owl-slider-layout-3 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}">
   @foreach($slider->slides as $index => $slide)
-  
+    @if($slide->active)
     <div class="card-owl">
       <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                           tooltip="{{$tooltipEditLink}}"/>
@@ -37,6 +37,7 @@
         </div>
       @endif
     </div>
+    @endif
   @endforeach
 </div>
 @section('scripts-owl')

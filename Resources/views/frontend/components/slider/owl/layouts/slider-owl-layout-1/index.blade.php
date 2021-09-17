@@ -2,7 +2,7 @@
      class="owl-carousel slider-component owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}"
      style="max-height: {{ $height }}">
   @foreach($slider->slides as $index => $slide)
-
+  @if($slide->active)
 
 
     @switch($slide->type)
@@ -70,6 +70,7 @@
       </div>
       @break
     @endswitch
+    @endif
   @endforeach
 </div>
 @section('scripts-owl')
