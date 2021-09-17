@@ -13,7 +13,7 @@ class Owl extends Component
     public $view;
     public $height;
     public $margin;
-    public $loop;
+    public $loopOwl; //renamed because the $loop is reserved into de blade @foreach
     public $dots;
     public $dotsPosition;
     public $dotsStyle;
@@ -49,7 +49,7 @@ class Owl extends Component
         $this->dotsStyle = $dotsStyle ?? 'line';
         $this->nav = $nav ?? true;
         $this->navText = json_encode($navText);
-        $this->loop = $loop ?? true;
+        $this->loopOwl = $loop ?? true;
         $this->autoplay = $autoplay ?? true;
         $this->autoplayHoverPause = $autoplayHoverPause ?? true;
         $this->autoplayTimeout = $autoplayTimeout ?? 5000;

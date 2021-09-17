@@ -47,7 +47,7 @@
       $('#{{ $slider->system_name }}').owlCarousel({
         items: 1,
         dots: {!! $dots ? 'true' : 'false' !!},
-        loop: {!! $loop ? 'true' : 'false' !!},
+        loop: {!! $loopOwl ? 'true' : 'false' !!},
         lazyLoad: true,
         margin: {!! $margin !!},
         nav: {!! $nav ? 'true' : 'false' !!},
