@@ -1,10 +1,9 @@
 <div id="{{ $slider->system_name }}"
-     class="owl-carousel owl-theme owl-slider-layout-3 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}">
+     class="owl-carousel owl-theme owl-slider-layout-3 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
   @foreach($slider->slides as $index => $slide)
-    @if($slide->active)
-    <div class="card-owl">
       <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                           tooltip="{{$tooltipEditLink}}"/>
+    <div class="card-owl">
       <div class="bg-image">
         <x-media::single-image :alt="$slide->title ?? Setting::get('core::site-name')"
                                :title="$slide->title ?? Setting::get('core::site-name')"
@@ -37,7 +36,6 @@
         </div>
       @endif
     </div>
-    @endif
   @endforeach
 </div>
 @section('scripts-owl')
@@ -47,7 +45,7 @@
       $('#{{ $slider->system_name }}').owlCarousel({
         items: 1,
         dots: {!! $dots ? 'true' : 'false' !!},
-        loop: {!! $loopOwl ? 'true' : 'false' !!},
+        loop: {!! $loop ? 'true' : 'false' !!},
         lazyLoad: true,
         margin: {!! $margin !!},
         nav: {!! $nav ? 'true' : 'false' !!},

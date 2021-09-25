@@ -1,10 +1,9 @@
 <div id="{{ $slider->system_name }}"
-     class="owl-carousel owl-theme owl-slider-layout-4 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }}">
+     class="owl-carousel owl-theme owl-slider-layout-4 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
   @foreach($slider->slides as $index => $slide)
-    @if($slide->active)
-    <div class="card border-0">
       <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                           tooltip="{{$tooltipEditLink}}"/>
+    <div class="card border-0">
       <div class="row align-items-center">
         <div class="col-lg-6 {{$orderClasses["photo"] ?? 'order-0'}}">
           <div class="bg-image">
@@ -45,7 +44,6 @@
 
       </div>
     </div>
-    @endif
   @endforeach
 </div>
 @section('scripts-owl')
@@ -55,7 +53,7 @@
       $('#{{ $slider->system_name }}').owlCarousel({
         items: 1,
         dots: {!! $dots ? 'true' : 'false' !!},
-        loop: {!! $loopOwl ? 'true' : 'false' !!},
+        loop: {!! $loop ? 'true' : 'false' !!},
         lazyLoad: true,
         margin: {!! $margin !!},
         nav: {!! $nav ? 'true' : 'false' !!},
