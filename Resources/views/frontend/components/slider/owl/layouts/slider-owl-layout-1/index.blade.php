@@ -4,12 +4,15 @@
   @foreach($slider->slides as $index => $slide)
     <div class="relative-position">
       <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
-                          tooltip="{{$tooltipEditLink}}"/>
+                      tooltip="{{$tooltipEditLink}}"/>
     </div>
+  @if($slide->active)
     @switch($slide->type)
 
       @case("video")
       <div class="item h-100">
+        <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                            tooltip="{{$tooltipEditLink}}"/>
         @if($slide->mediaFiles()->slideimage->isVideo)
           <video class="d-block h-100 slider-img__{{$imgObjectFit}}" width="100%" loop autoplay muted>
             <source src="{{ $slide->mediaFiles()->slideimage->path }}"/>
@@ -22,6 +25,8 @@
       @break
       @default
       <div class="item h-100">
+        <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                            tooltip="{{$tooltipEditLink}}"/>
         @if($slide->mediaFiles()->slideimage->isVideo)
           <video class="d-block h-100 slider-img__{{$imgObjectFit}}" width="100%" loop autoplay muted>
             <source src="{{ $slide->mediaFiles()->slideimage->path }}"/>
@@ -67,6 +72,7 @@
       </div>
       @break
     @endswitch
+    @endif
   @endforeach
 </div>
 @section('scripts-owl')
@@ -76,7 +82,7 @@
       $('#{{ $slider->system_name }}').owlCarousel({
         items: 1,
         dots: {!! $dots ? 'true' : 'false' !!},
-        loop: {!! $loop ? 'true' : 'false' !!},
+        loop: {!! $loopOwl ? 'true' : 'false' !!},
         lazyLoad: true,
         margin: {!! $margin !!},
         nav: {!! $nav ? 'true' : 'false' !!},

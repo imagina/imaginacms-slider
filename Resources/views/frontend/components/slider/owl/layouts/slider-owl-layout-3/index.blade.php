@@ -5,7 +5,10 @@
       <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                           tooltip="{{$tooltipEditLink}}"/>
     </div>
+    @if($slide->active)
     <div class="card-owl">
+      <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                          tooltip="{{$tooltipEditLink}}"/>
       <div class="bg-image">
         <x-media::single-image :alt="$slide->title ?? Setting::get('core::site-name')"
                                :title="$slide->title ?? Setting::get('core::site-name')"
@@ -38,6 +41,7 @@
         </div>
       @endif
     </div>
+    @endif
   @endforeach
 </div>
 @section('scripts-owl')
@@ -47,7 +51,7 @@
       $('#{{ $slider->system_name }}').owlCarousel({
         items: 1,
         dots: {!! $dots ? 'true' : 'false' !!},
-        loop: {!! $loop ? 'true' : 'false' !!},
+        loop: {!! $loopOwl ? 'true' : 'false' !!},
         lazyLoad: true,
         margin: {!! $margin !!},
         nav: {!! $nav ? 'true' : 'false' !!},

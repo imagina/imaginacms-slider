@@ -5,7 +5,10 @@
       <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                           tooltip="{{$tooltipEditLink}}"/>
     </div>
+    @if($slide->active)
     <div class="card border-0">
+      <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                          tooltip="{{$tooltipEditLink}}"/>
       <div class="row no-gutters">
         <div class="col-lg-6 ">
           <div class="h-100 position-relative">
@@ -54,6 +57,7 @@
 
       </div>
     </div>
+    @endif
   @endforeach
 </div>
 @section('scripts-owl')
@@ -63,7 +67,7 @@
       $('#{{ $slider->system_name }}').owlCarousel({
         items: 1,
         dots: {!! $dots ? 'true' : 'false' !!},
-        loop: {!! $loop ? 'true' : 'false' !!},
+        loop: {!! $loopOwl ? 'true' : 'false' !!},
         lazyLoad: true,
         margin: {!! $margin !!},
         nav: {!! $nav ? 'true' : 'false' !!},
