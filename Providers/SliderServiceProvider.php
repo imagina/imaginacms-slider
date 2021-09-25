@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Modules\Slider\Entities\Slider;
 use Modules\Slider\Entities\Slide;
 use Modules\Slider\Presenters\SliderPresenter;
+use Modules\Slider\Repositories\Cache\CacheSlideApiDecorator;
+use Modules\Slider\Repositories\Cache\CacheSliderApiDecorator;
 use Modules\Slider\Repositories\Cache\CacheSliderDecorator;
 use Modules\Slider\Repositories\Cache\CacheSlideDecorator;
 use Modules\Slider\Repositories\Eloquent\EloquentSlideApiRepository;
