@@ -1,9 +1,9 @@
 <div id="{{ $slider->system_name }}"
      class="owl-carousel owl-theme owl-slider-layout-3 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
   @foreach($slider->slides as $index => $slide)
+    <div class="card-owl">
       <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                           tooltip="{{$tooltipEditLink}}"/>
-    <div class="card-owl">
       <div class="bg-image">
         <x-media::single-image :alt="$slide->title ?? Setting::get('core::site-name')"
                                :title="$slide->title ?? Setting::get('core::site-name')"
