@@ -53,6 +53,7 @@
 
       </div>
     </div>
+    @endif
   @endforeach
 </div>
 @section('scripts-owl')
