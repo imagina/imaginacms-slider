@@ -86,8 +86,8 @@ class Slide extends Model
 
     return $this->imageUrl;
   }
-
-
+  
+  
   /**
    * returns slider link URL
    * @return string|null
@@ -103,8 +103,27 @@ class Slide extends Model
         $this->linkUrl = route('page', ['uri' => $this->page->slug]);
       }
     }
-
+    
     return $this->linkUrl;
+  }
+  
+  /**
+   * returns slider link URL
+   * @return string|null
+   */
+  public function getUrlAttribute()
+  {
+    $url = "";
+      if (!empty($this->url)) {
+        $url = $this->url;
+      } elseif (!empty($this->uri)) {
+        $url = \LaravelLocalization::localizeUrl('/'. $this->uri);;
+      } elseif (!empty($this->page)) {
+        $url = route('page', ['uri' => $this->page->slug]);
+      }
+    
+    
+    return $url;
   }
 
   protected function setOptionsAttribute($value)
