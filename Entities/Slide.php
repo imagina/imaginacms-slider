@@ -118,7 +118,7 @@ class Slide extends Model
       if (!empty($this->url)) {
         $url = $this->url;
       } elseif (!empty($this->uri)) {
-        $url = \LaravelLocalization::localizeUrl('/'. $this->uri);;
+        $url = \LaravelLocalization::localizeUrl('/'. $this->uri);
       } elseif (!empty($this->page)) {
         $url = route('page', ['uri' => $this->page->slug]);
       }
