@@ -32,7 +32,7 @@
                         {!! $slide->custom_html !!}
                       </div>
                     @endif
-                    @if($withViewMoreButton)
+                    @if($slide->url != "" && $slide->uri != "")
                       <div class="d-block">
                         <a class="btn btn-primary"
                            href="{{ $slide->url ?? $slide->uri }}">{{ $slide->caption ?? trans('isite::common.menu.viewMore') }}</a>
