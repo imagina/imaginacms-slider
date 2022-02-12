@@ -38,7 +38,7 @@
           @endif
           @if(!empty($slide->title) || !empty($slide->caption) || !empty($slide->custom_html))
             <div class="carousel-caption px-o pb-0 d-none d-md-block h-100">
-              <div class="container h-100">
+              <div class="{{$container}} h-100">
                 <div class="row h-100 justify-content-center">
                   <div class="col-10 text-center">
                     @if(!empty($slide->title))

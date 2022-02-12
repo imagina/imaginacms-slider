@@ -1,4 +1,5 @@
 .slider-component{
+  overflow: hidden;
   @include media-breakpoint-down(md) {
     height: calc(100vw * (.3)) !important;
   }
