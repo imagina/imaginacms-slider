@@ -3,7 +3,6 @@
      style="max-height: {{ $height }}">
   @foreach($slider->slides as $index => $slide)
     @if($slide->active)
-
       @switch($slide->type)
         @case("video")
         <div class="item h-100">
@@ -34,7 +33,6 @@
                                    imgClasses="d-block h-100 slider-img__{{$imgObjectFit}}"
                                    width="100%"
                                    :mediaFiles="$slide->mediaFiles()" zone="slideimage"/>
-
           @endif
           @if(!empty($slide->title) || !empty($slide->caption) || !empty($slide->custom_html))
             <div class="carousel-caption px-o pb-0 d-none d-md-block h-100">
@@ -60,12 +58,12 @@
                         {!! $slide->summary !!}
                       </div>
                     @endif
-
-                    <div class="d-block">
-                      <a class="btn btn-primary"
-                         href="{{ $slide->url ?? $slide->uri }}">{{ $slide->caption ?? trans('isite::common.menu.viewMore') }}</a>
-                    </div>
-
+                    @if(!empty($slide->url)  || !empty($slide->uri))
+                      <div class="d-block">
+                        <a class="btn btn-primary"
+                           href="{{ $slide->url ?? $slide->uri }}">{{ $slide->caption ?? trans('isite::common.menu.viewMore') }}</a>
+                      </div>
+                    @endif
                   </div>
                 </div>
               </div>

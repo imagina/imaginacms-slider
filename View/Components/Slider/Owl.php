@@ -2,12 +2,11 @@
 
 
 namespace Modules\Slider\View\Components\Slider;
-
 use Illuminate\View\Component;
 
 class Owl extends Component
 {
-  
+
   public $id;
   public $layout;
   public $slider;
@@ -33,7 +32,7 @@ class Owl extends Component
   public $withViewMoreButton;
   public $stagePadding;
   public $container;
-  
+
   /**
    * Create a new component instance.
    *
