@@ -29,7 +29,7 @@
                 {!! $slide->custom_html !!}
               </div>
             @endif
-            @if($slide->url != "" && $slide->uri != "")
+            @if(!empty($slide->url)  || !empty($slide->uri))
               <div class="col-12 d-block {{$orderClasses["viewMoreButton"] ?? 'order-3'}}  item-view-more-button">
                 <a class="btn btn-primary view-more-button"
                    href="{{ $slide->url ?? $slide->uri }}">{{ $slide->caption ?? trans('isite::common.menu.viewMore') }}</a>
