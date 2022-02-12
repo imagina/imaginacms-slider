@@ -3,6 +3,7 @@
   <script>
     $(document).ready(function () {
       $('#{{ $slider->system_name }}').owlCarousel({
+        stagePadding: {!!$stagePadding!!},
         items: 1,
         dots: {!! $dots ? 'true' : 'false' !!},
         loop: {!! $loopOwl ? 'true' : 'false' !!},

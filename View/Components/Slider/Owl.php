@@ -31,6 +31,7 @@ class Owl extends Component
   public $editLink;
   public $tooltipEditLink;
   public $withViewMoreButton;
+  public $stagePadding;
 
   /**
    * Create a new component instance.
@@ -40,9 +41,9 @@ class Owl extends Component
   public function __construct($id, $layout = 'slider-owl-layout-1', $height = '500px', $autoplay = true, $margin = 0,
                               $autoplayHoverPause = true, $loop = true, $dots = true, $dotsPosition = 'center',
                               $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 5000, $imgObjectFit = "cover",
-                              $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true)
+                              $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
+                              $stagePadding = 0, $view = null)
   {
-
     $this->id = $id;
     $this->layout = $layout ?? 'slider-owl-layout-1';
     $this->height = $height ?? '500px';
@@ -62,7 +63,8 @@ class Owl extends Component
     $this->orderClasses = !empty($orderClasses) ? $orderClasses : ["photo" => "order-0", "content" => "order-1"];
     list($this->editLink, $this->tooltipEditLink) = getEditLink('Modules\Slider\Repositories\SlideRepository');
     $this->withViewMoreButton = $withViewMoreButton;
-    $this->view = "slider::frontend.components.slider.owl.layouts.{$this->layout}.index";
+    $this->stagePadding = $stagePadding;
+    $this->view = $view ?? "slider::frontend.components.slider.owl.layouts.{$this->layout}.index";
     $this->getItem();
   }
 
@@ -74,6 +76,7 @@ class Owl extends Component
       ],
       'include' => ['slides']
     ];
+
     $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
     if (!$this->slider) {
       $params['filter']['field'] = 'system_name';

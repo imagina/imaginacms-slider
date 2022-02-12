@@ -6,7 +6,7 @@
         <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                             tooltip="{{$tooltipEditLink}}"/>
         <div class="row align-items-center">
-          <div class="col-lg-6 {{$orderClasses["photo"] ?? 'order-0'}}">
+          <div class="col-12 col-lg-6 {{$orderClasses["photo"] ?? 'order-0'}}">
             <div class="bg-image">
               <x-media::single-image :alt="$slide->title ?? Setting::get('core::site-name')"
                                      :title="$slide->title ?? Setting::get('core::site-name')"
@@ -15,7 +15,7 @@
                                      :mediaFiles="$slide->mediaFiles()" zone="slideimage"/>
             </div>
           </div>
-          <div class="col-lg-6 {{$orderClasses["content"] ?? 'order-1'}}">
+          <div class="col-12 col-lg-6 {{$orderClasses["content"] ?? 'order-1'}}">
             <div class="card-body py-5">
               @if(!empty($slide->title) || !empty($slide->caption) || !empty($slide->custom_html))
                 @if(!empty($slide->title))
