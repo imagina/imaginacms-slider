@@ -115,8 +115,8 @@ class Slide extends Model
   public function getUrlAttribute()
   {
     $url = "";
-      if (!empty($this->url)) {
-        $url = $this->url;
+      if (!empty($this->attributes["url"])) {
+        $url = $this->attributes["url"];
       } elseif (!empty($this->uri)) {
         $url = \LaravelLocalization::localizeUrl('/'. $this->uri);
       } elseif (!empty($this->page)) {
