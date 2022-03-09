@@ -30,7 +30,7 @@ return [
       "subHeader" => [
         "refresh" => true,
         "breadcrumb" => [
-          "qslider.index"
+          "slider_cms_admin_index"
         ]
       ]
     ],
