@@ -66,7 +66,7 @@ class EloquentSlideApiRepository extends EloquentBaseRepository implements Slide
       }
   
       $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]"));
-      $tenantWithCentralData = in_array("slides",$entitiesWithCentralData);
+      $tenantWithCentralData = in_array("slide",$entitiesWithCentralData);
   
       if ($tenantWithCentralData && isset(tenant()->id)) {
         $model = $this->model;

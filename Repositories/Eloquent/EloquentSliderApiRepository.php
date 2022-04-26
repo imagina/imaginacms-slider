@@ -67,7 +67,7 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
       }
     }
     $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]"));
-    $tenantWithCentralData = in_array("sliders",$entitiesWithCentralData);
+    $tenantWithCentralData = in_array("slider",$entitiesWithCentralData);
   
     if ($tenantWithCentralData && isset(tenant()->id)) {
       $model = $this->model;
