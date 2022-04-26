@@ -1,7 +1,7 @@
 <div id="{{ $slider->system_name }}"
      class="owl-carousel slider-component owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative"
      style="max-height: {{ $height }}">
-  @foreach($slider->slides as $index => $slide)
+  @foreach($slides as $index => $slide)
     @if($slide->active)
       @switch($slide->type)
         @case("video")

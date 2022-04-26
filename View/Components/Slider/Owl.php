@@ -32,6 +32,7 @@ class Owl extends Component
   public $withViewMoreButton;
   public $stagePadding;
   public $container;
+  public $slides;
 
   /**
    * Create a new component instance.
@@ -74,14 +75,22 @@ class Owl extends Component
     $params = [
       'filter' => [
         'field' => 'id',
-      ],
-      'include' => ['slides']
+      ]
     ];
     
     $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
     if (!$this->slider) {
       $params['filter']['field'] = 'system_name';
       $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
+  
+  
+      $params = [
+        'filter' => [
+          'sliderId' => $this->slider->id ?? null,
+        ],
+      ];
+      
+      $this->slides = app('Modules\\Slider\\Repositories\\SlideApiRepository')->getItemsBy(json_decode(json_encode($params)));
     }
   }
   

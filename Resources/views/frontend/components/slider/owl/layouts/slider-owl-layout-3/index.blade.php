@@ -1,6 +1,6 @@
 <div id="{{ $slider->system_name }}"
      class="owl-carousel owl-theme owl-slider-layout-3 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
-  @foreach($slider->slides as $index => $slide)
+  @foreach($slides as $index => $slide)
     @if($slide->active)
       <div class="card card-item border-0">
         <div class="row align-items-center">
