@@ -82,16 +82,17 @@ class Owl extends Component
     if (!$this->slider) {
       $params['filter']['field'] = 'system_name';
       $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
-  
-  
-      $params = [
-        'filter' => [
-          'sliderId' => $this->slider->id ?? null,
-        ],
-      ];
       
-      $this->slides = app('Modules\\Slider\\Repositories\\SlideApiRepository')->getItemsBy(json_decode(json_encode($params)));
     }
+  
+    $params = [
+      'filter' => [
+        'sliderId' => $this->slider->id ?? null,
+      ],
+    ];
+  
+    $this->slides = app('Modules\\Slider\\Repositories\\SlideApiRepository')->getItemsBy(json_decode(json_encode($params)));
+  
   }
   
   /**
