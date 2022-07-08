@@ -16,9 +16,9 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
 
     /*== RELATIONSHIPS ==*/
     if (in_array('*', $params->include)) {//If Request all relationships
-      $query->with([]);
+      $query->with(['translations','files']);
     } else {//Especific relationships
-      $includeDefault = [];//Default relationships
+      $includeDefault = ['translations','files'];//Default relationships
       if (isset($params->include))//merge relations with default relationships
         $includeDefault = array_merge($includeDefault, $params->include);
       $query->with($includeDefault);//Add Relationships to query
@@ -66,7 +66,7 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
         $query->where('system_name', $filter->systemName);
       }
     }
-    $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]"));
+    $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]",true));
     $tenantWithCentralData = in_array("slider",$entitiesWithCentralData);
   
     if ($tenantWithCentralData && isset(tenant()->id)) {
@@ -78,6 +78,8 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
           ->orWhereNull($model->qualifyColumn(BelongsToTenant::$tenantIdColumn));
       });
     }
+    
+
     /*== FIELDS ==*/
     if (isset($params->fields) && count($params->fields))
       $query->select($params->fields);
@@ -116,8 +118,8 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
         $field = $filter->field;
     }
   
-    $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]"));
-    $tenantWithCentralData = in_array("sliders",$entitiesWithCentralData);
+    $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]",true));
+    $tenantWithCentralData = in_array("slider",$entitiesWithCentralData);
   
     if ($tenantWithCentralData && isset(tenant()->id)) {
       $model = $this->model;
@@ -128,7 +130,7 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
           ->orWhereNull($model->qualifyColumn(BelongsToTenant::$tenantIdColumn));
       });
     }
- 
+    
     /*== FIELDS ==*/
     if (isset($params->fields) && count($params->fields))
       $query->select($params->fields);

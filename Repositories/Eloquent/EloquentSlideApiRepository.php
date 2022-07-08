@@ -20,9 +20,9 @@ class EloquentSlideApiRepository extends EloquentBaseRepository implements Slide
   
       /*== RELATIONSHIPS ==*/
       if(in_array('*',$params->include ?? [])){//If Request all relationships
-        $query->with([]);
+        $query->with(['translations','files']);
       }else{//Especific relationships
-        $includeDefault = [];//Default relationships
+        $includeDefault = ['translations','files'];//Default relationships
         if (isset($params->include))//merge relations with default relationships
           $includeDefault = array_merge($includeDefault, $params->include);
         $query->with($includeDefault);//Add Relationships to query
@@ -65,7 +65,7 @@ class EloquentSlideApiRepository extends EloquentBaseRepository implements Slide
         }
       }
   
-      $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]"));
+      $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]",true));
       $tenantWithCentralData = in_array("slide",$entitiesWithCentralData);
   
       if ($tenantWithCentralData && isset(tenant()->id)) {
