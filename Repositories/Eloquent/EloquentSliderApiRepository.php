@@ -16,9 +16,9 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
 
     /*== RELATIONSHIPS ==*/
     if (in_array('*', $params->include)) {//If Request all relationships
-      $query->with(['translations','files']);
+      $query->with([]);
     } else {//Especific relationships
-      $includeDefault = ['translations','files'];//Default relationships
+      $includeDefault = [];//Default relationships
       if (isset($params->include))//merge relations with default relationships
         $includeDefault = array_merge($includeDefault, $params->include);
       $query->with($includeDefault);//Add Relationships to query
