@@ -72,12 +72,24 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
     if ($tenantWithCentralData && isset(tenant()->id)) {
       $model = $this->model;
     
-      $query->withoutTenancy();
+     
+      if (isset($params->setting) && isset($params->setting->fromAdmin) && $params->setting->fromAdmin==false) {
+        $query->withoutTenancy();
+      }
+   
+      
       $query->where(function ($query) use ($model) {
         $query->where($model->qualifyColumn(BelongsToTenant::$tenantIdColumn), tenant()->getTenantKey())
           ->orWhereNull($model->qualifyColumn(BelongsToTenant::$tenantIdColumn));
       });
     }
+
+    /*
+    if (isset($params->setting) && isset($params->setting->fromAdmin) && $params->setting->fromAdmin) {
+      $query->withTenancy();
+    }
+    */
+   
     
 
     /*== FIELDS ==*/
