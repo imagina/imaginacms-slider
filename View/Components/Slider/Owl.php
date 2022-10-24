@@ -33,6 +33,9 @@ class Owl extends Component
   public $stagePadding;
   public $container;
   public $slides;
+  public $itemComponentAttributes;
+  public $itemComponentNamespace;
+  public $itemComponent;
 
   /**
    * Create a new component instance.
@@ -43,7 +46,8 @@ class Owl extends Component
                               $autoplayHoverPause = true, $loop = true, $dots = true, $dotsPosition = 'center',
                               $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 5000, $imgObjectFit = "cover",
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
-                              $container="container", $stagePadding = 0, $view = null)
+                              $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
+                              $itemComponentNamespace = null, $itemComponent = null )
   {
     $this->id = $id;
     $this->layout = $layout ?? 'slider-owl-layout-1';
@@ -68,7 +72,11 @@ class Owl extends Component
     $this->container = $container;
     $this->view = $view ?? "slider::frontend.components.slider.owl.layouts.{$this->layout}.index";
     $this->getItem();
+    $this->itemComponent = $itemComponent ?? "isite::item-list";
+    $this->itemComponentNamespace =  $itemComponentNamespace ?? "Modules\Isite\View\Components\ItemList";
+    $this->itemComponentAttributes = count($itemComponentAttributes) ? $itemComponentAttributes : config('asgard.slider.config.indexItemListAttributes');
   }
+
   
   public function getItem()
   {
@@ -92,7 +100,8 @@ class Owl extends Component
     ];
   
     $this->slides = app('Modules\\Slider\\Repositories\\SlideApiRepository')->getItemsBy(json_decode(json_encode($params)));
-  
+
+
   }
   
   /**
