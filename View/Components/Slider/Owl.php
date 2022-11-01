@@ -36,6 +36,7 @@ class Owl extends Component
   public $itemComponentAttributes;
   public $itemComponentNamespace;
   public $itemComponent;
+  public $navPosition;
 
   /**
    * Create a new component instance.
@@ -47,7 +48,7 @@ class Owl extends Component
                               $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 5000, $imgObjectFit = "cover",
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
-                              $itemComponentNamespace = null, $itemComponent = null )
+                              $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral' )
   {
     $this->id = $id;
     $this->layout = $layout ?? 'slider-owl-layout-1';
@@ -75,6 +76,7 @@ class Owl extends Component
     $this->itemComponent = $itemComponent ?? "isite::item-list";
     $this->itemComponentNamespace =  $itemComponentNamespace ?? "Modules\Isite\View\Components\ItemList";
     $this->itemComponentAttributes = count($itemComponentAttributes) ? $itemComponentAttributes : config('asgard.slider.config.indexItemListAttributes');
+    $this->navPosition = $navPosition ?? 'lateral';
   }
 
   

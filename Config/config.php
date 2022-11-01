@@ -96,6 +96,7 @@ return [
         'summaryMarginB'=>'mb-2',
         'summaryHeight'=> 'auto',
         'summaryLetterSpacing'=>0,
-        'summaryTextDecoration'=>'none'
+        'summaryTextDecoration'=>'none',
+        'containerActive'=>true,
     ],
 ];
