@@ -165,8 +165,8 @@ return [
           ],
           "responsive" => [
             "name" => "responsive",
-            "value" => "none",
-            "type" => "input",
+            "value" => "",
+            "type" => "json",
             "props" => [
               "label" => "responsive"
             ]
