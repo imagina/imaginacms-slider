@@ -4,7 +4,7 @@ $vAttributes = config("asgard.isite.standardValuesForBlocksAttributes");
 
 return [
   "sliderOwl" => [
-    "title" => "sliderOwl",
+    "title" => "Slider OWL",
     "systemName" => "slider::slider.Owl",
     "nameSpace" => "Modules\Slider\View\Components\Slider\Owl",
     "content" => [
