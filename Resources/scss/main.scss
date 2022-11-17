@@ -514,11 +514,10 @@
   &.owl-with-nav{
     .owl-nav {
       position: absolute;
-      top: 0;
       left: 15px;
-      bottom: 0;
       right: 15px;
       display: flex;
+      margin-top: 0;
       .owl-prev:focus, .owl-next:focus {
         outline: 0 !important;
       }
@@ -526,25 +525,26 @@
     &.carousel-nav-position-lateral {
       .owl-nav {
         justify-content: space-between;
-        align-items: center;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
     &.carousel-nav-position-center-bottom {
       .owl-nav {
         justify-content: center;
-        align-items: end;
+        bottom: 0;
       }
     }
     &.carousel-nav-position-left-bottom {
       .owl-nav {
         justify-content: left;
-        align-items: end;
+        bottom: 0;
       }
     }
     &.carousel-nav-position-right-bottom {
       .owl-nav {
         justify-content: right;
-        align-items: end;
+        bottom: 0;
       }
     }
 
