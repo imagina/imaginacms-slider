@@ -1,6 +1,6 @@
 <?php
 
-$vAttributes = config("asgard.isite.standardValuesForBlocksAttributes");
+$vAttributes = include(base_path().'/Modules/Isite/Config/standardValuesForBlocksAttributes.php');
 
 return [
     "sliderOwl" => [
