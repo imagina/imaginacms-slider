@@ -14,7 +14,7 @@ class AddResponsiveToSlidesTable extends Migration
     public function up()
     {
       Schema::table('slider__slides', function (Blueprint $table) {
-        $table->integer('responsive')->default(0);
+        $table->integer('responsive')->default(1);
       });
     }
 
