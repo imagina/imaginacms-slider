@@ -35,6 +35,7 @@ class Slide extends Model
     'active',
     'external_image_url',
     'custom_html',
+    'to_mobile',
     'options'
   ];
   protected $table = 'slider__slides';
