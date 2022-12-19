@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddToMobileToSlidesTable extends Migration
+class AddResponsiveToSlidesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddToMobileToSlidesTable extends Migration
     public function up()
     {
       Schema::table('slider__slides', function (Blueprint $table) {
-        $table->boolean('to_mobile')->default(false);
+        $table->integer('responsive')->default(1);
       });
     }
 

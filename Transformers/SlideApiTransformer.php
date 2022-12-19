@@ -23,7 +23,7 @@ class SlideApiTransformer extends JsonResource
       'customHtml' => $this->custom_html ? $this->custom_html : '',
       'externalImageUrl' => $this->external_image_url,
       'target' => $this->target,
-      'toMobile' => $this->to_mobile,
+      'responsive' => $this->responsive,
       'options' => $this->when($this->options, $this->options),
       'imageUrl' => $this->getImageUrl(),
       'mediaFiles' => $this->mediaFiles(),
