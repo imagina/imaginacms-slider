@@ -113,6 +113,8 @@ class Owl extends Component
    */
   public function render()
   {
+    if(!isset($this->slider->id))
+      return view("slider::frontend.components.slider.owl.invalid-slider");
     return view($this->view);
   }
 }
