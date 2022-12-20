@@ -37,6 +37,7 @@ class Owl extends Component
   public $itemComponentNamespace;
   public $itemComponent;
   public $navPosition;
+  public $isMobile;
 
   /**
    * Create a new component instance.
@@ -77,6 +78,7 @@ class Owl extends Component
     $this->itemComponentNamespace =  $itemComponentNamespace ?? "Modules\Isite\View\Components\ItemList";
     $this->itemComponentAttributes = count($itemComponentAttributes) ? $itemComponentAttributes : config('asgard.slider.config.indexItemListAttributes');
     $this->navPosition = $navPosition ?? 'lateral';
+    $this->isMobile = isMobileDevice();
   }
 
   

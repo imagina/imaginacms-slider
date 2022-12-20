@@ -1,18 +1,29 @@
 <div id="{{ $slider->system_name }}"
      class="owl-carousel owl-theme owl-slider-layout-5 {{ $nav ? ' owl-with-nav carousel-nav-position-'.$navPosition : '' }} {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
-    @foreach($slider->slides as $index => $slide)
-
+  @foreach($slider->slides as $index => $slide)
+    @if($isMobile)
+      @if($slide->responsive != 2)
         <div class="slide">
-
-            @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
+          @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
             @php
-                $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
+              $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
             @endphp
-            @endif
-            @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
-
+          @endif
+          @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
         </div>
-
-    @endforeach
+      @endif
+    @else
+      @if($slide->responsive != 3)
+        <div class="slide">
+          @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
+            @php
+              $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
+            @endphp
+          @endif
+          @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
+        </div>
+      @endif
+    @endif
+  @endforeach
 </div>
 @include("slider::frontend.components.slider.owl.script")
