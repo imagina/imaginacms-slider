@@ -15,6 +15,8 @@
         responsiveClass: {!! $responsiveClass ? 'true' : 'false' !!},
         responsive: {!! $responsive!!},
         autoplayTimeout: {{$autoplayTimeout}},
+        mouseDrag: {!! $mouseDrag ? 'true' : 'false' !!},
+        touchDrag: {!! $touchDrag ? 'true' : 'false' !!},
         {!! !empty($navText) ? 'navText: '.$navText."," : "" !!}
       });
     });

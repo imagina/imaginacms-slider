@@ -37,6 +37,8 @@ class Owl extends Component
   public $itemComponentNamespace;
   public $itemComponent;
   public $navPosition;
+  public $mouseDrag;
+  public $touchDrag;
   public $isMobile;
 
   /**
@@ -49,7 +51,8 @@ class Owl extends Component
                               $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 5000, $imgObjectFit = "cover",
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
-                              $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral' )
+                              $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
+                              $mouseDrag = true, $touchDrag = true)
   {
     $this->id = $id;
     $this->layout = $layout ?? 'slider-owl-layout-1';
@@ -78,6 +81,8 @@ class Owl extends Component
     $this->itemComponentNamespace =  $itemComponentNamespace ?? "Modules\Isite\View\Components\ItemList";
     $this->itemComponentAttributes = count($itemComponentAttributes) ? $itemComponentAttributes : config('asgard.slider.config.indexItemListAttributes');
     $this->navPosition = $navPosition ?? 'lateral';
+    $this->mouseDrag = $mouseDrag;
+    $this->touchDrag = $touchDrag;
     $this->isMobile = isMobileDevice();
   }
 
