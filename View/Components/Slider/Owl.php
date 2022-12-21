@@ -37,6 +37,8 @@ class Owl extends Component
   public $itemComponentNamespace;
   public $itemComponent;
   public $navPosition;
+  public $mouseDrag;
+  public $touchDrag;
 
   /**
    * Create a new component instance.
@@ -48,7 +50,8 @@ class Owl extends Component
                               $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 5000, $imgObjectFit = "cover",
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
-                              $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral' )
+                              $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
+                              $mouseDrag = true, $touchDrag = true)
   {
     $this->id = $id;
     $this->layout = $layout ?? 'slider-owl-layout-1';
@@ -77,6 +80,8 @@ class Owl extends Component
     $this->itemComponentNamespace =  $itemComponentNamespace ?? "Modules\Isite\View\Components\ItemList";
     $this->itemComponentAttributes = count($itemComponentAttributes) ? $itemComponentAttributes : config('asgard.slider.config.indexItemListAttributes');
     $this->navPosition = $navPosition ?? 'lateral';
+    $this->mouseDrag = $mouseDrag;
+    $this->touchDrag = $touchDrag;
   }
 
   
@@ -89,6 +94,8 @@ class Owl extends Component
     ];
     
     $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
+
+
     if (!$this->slider) {
       $params['filter']['field'] = 'system_name';
       $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
