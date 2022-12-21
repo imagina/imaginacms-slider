@@ -39,6 +39,7 @@ class Owl extends Component
   public $navPosition;
   public $mouseDrag;
   public $touchDrag;
+  public $isMobile;
 
   /**
    * Create a new component instance.
@@ -82,6 +83,7 @@ class Owl extends Component
     $this->navPosition = $navPosition ?? 'lateral';
     $this->mouseDrag = $mouseDrag;
     $this->touchDrag = $touchDrag;
+    $this->isMobile = isMobileDevice();
   }
 
   
@@ -94,8 +96,6 @@ class Owl extends Component
     ];
     
     $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
-
-
     if (!$this->slider) {
       $params['filter']['field'] = 'system_name';
       $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
