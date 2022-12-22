@@ -111,11 +111,11 @@ return [
                 "fields" => [
                     "nav" => [
                         "name" => "nav",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "nav",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "navPosition" => [
@@ -148,11 +148,11 @@ return [
                 "fields" => [
                     "dots" => [
                         "name" => "dots",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "Dots",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "dotsPosition" => [
