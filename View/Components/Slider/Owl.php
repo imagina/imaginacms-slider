@@ -48,7 +48,7 @@ class Owl extends Component
    */
   public function __construct($id, $layout = 'slider-owl-layout-1', $height = '500px', $autoplay = true, $margin = 0,
                               $autoplayHoverPause = true, $loop = true, $dots = true, $dotsPosition = 'center',
-                              $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 5000, $imgObjectFit = "cover",
+                              $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 10000, $imgObjectFit = "cover",
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
                               $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
@@ -66,7 +66,7 @@ class Owl extends Component
     $this->loopOwl = $loop ?? true;
     $this->autoplay = $autoplay ?? true;
     $this->autoplayHoverPause = $autoplayHoverPause ?? true;
-    $this->autoplayTimeout = $autoplayTimeout ?? 5000;
+    $this->autoplayTimeout = $autoplayTimeout ?? 10000;
     $this->imgObjectFit = $imgObjectFit ?? "cover";
     $this->responsive = json_encode($responsive ?? [0 => ["items" => 1]]);
     $this->responsiveClass = $responsiveClass;

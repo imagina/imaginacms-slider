@@ -7,32 +7,33 @@
                 $navText=[];
         @endphp
 @endif
+<div id="{{ $slider->system_name }}Slider">
 <div id="{{ $slider->system_name }}"
      class="owl-carousel owl-theme owl-slider-layout-5 {{ $nav ? ' owl-with-nav carousel-nav-position-'.$navPosition : '' }} {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
   @foreach($slider->slides as $index => $slide)
-    @if($isMobile)
-      @if($slide->responsive != 2)
         <div class="slide">
-          @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
-            @php
-              $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
-            @endphp
-          @endif
-          @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
+            @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
+                @php
+                    $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
+                @endphp
+            @endif
+            @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
         </div>
-      @endif
-    @else
-      @if($slide->responsive != 3)
-        <div class="slide">
-          @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
-            @php
-              $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
-            @endphp
-          @endif
-          @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
-        </div>
-      @endif
-    @endif
   @endforeach
 </div>
+</div>
 @include("slider::frontend.components.slider.owl.script")
+
+<style>
+    #{{ $slider->system_name }}Slider {
+        background: rgb(204 204 204 / 32%);
+        aspect-ratio: {{$itemComponentAttributes['imageAspect']}};
+    }
+    @if(!is_null($itemComponentAttributes['imageAspectMobile']))
+    @media (max-width: 767.98px) {
+        #{{ $slider->system_name }}Slider {
+            aspect-ratio: {{$itemComponentAttributes['imageAspectMobile']}};
+        }
+    }
+    @endif
+</style>
