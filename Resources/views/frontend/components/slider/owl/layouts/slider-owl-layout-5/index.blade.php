@@ -24,17 +24,19 @@
 </div>
 @include("slider::frontend.components.slider.owl.script")
 
-@if($itemComponentAttributes['layout']=="item-list-layout-7" && $itemComponentAttributes['imagePosition']=="1")
-<style>
-    #{{ $slider->system_name }}Slider {
-        aspect-ratio: {{$itemComponentAttributes['imageAspect']}};
-    }
-    @if(!is_null($itemComponentAttributes['imageAspectMobile']))
-    @media (max-width: 767.98px) {
+@if(!empty($itemComponentAttributes['imagePosition']))
+    @if($itemComponentAttributes['layout']=="item-list-layout-7" && $itemComponentAttributes['imagePosition']=="1")
+    <style>
         #{{ $slider->system_name }}Slider {
-            aspect-ratio: {{$itemComponentAttributes['imageAspectMobile']}};
+            aspect-ratio: {{$itemComponentAttributes['imageAspect']}};
         }
-    }
+        @if(!is_null($itemComponentAttributes['imageAspectMobile']))
+        @media (max-width: 767.98px) {
+            #{{ $slider->system_name }}Slider {
+                aspect-ratio: {{$itemComponentAttributes['imageAspectMobile']}};
+            }
+        }
+        @endif
+    </style>
     @endif
-</style>
 @endif
