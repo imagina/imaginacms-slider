@@ -24,9 +24,9 @@
 </div>
 @include("slider::frontend.components.slider.owl.script")
 
+@if($itemComponentAttributes['layout']=="item-list-layout-7" && $itemComponentAttributes['imagePosition']=="1")
 <style>
     #{{ $slider->system_name }}Slider {
-        background: rgb(204 204 204 / 32%);
         aspect-ratio: {{$itemComponentAttributes['imageAspect']}};
     }
     @if(!is_null($itemComponentAttributes['imageAspectMobile']))
@@ -37,3 +37,4 @@
     }
     @endif
 </style>
+@endif
