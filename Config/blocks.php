@@ -141,6 +141,23 @@ return [
                             "label" => "nav text",
                         ]
                     ],
+                    "navLateralLeftRight" => [
+                        "name" => "navLateralLeftRight",
+                        "value" => "15px",
+                        "tooltip" => "sadasd",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "Ancho (nav Lateral)",
+                        ]
+                    ],
+                    "navLateralTop" => [
+                        "name" => "navLateralTop",
+                        "value" => "50",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "Alto % (nav Lateral)",
+                        ]
+                    ],
                 ]
             ],
             "dots" => [
@@ -181,6 +198,14 @@ return [
                                 ["label" => "Cuadrado", "value" => "square"],
                                 ["label" => "linea", "value" => "line"]
                             ]
+                        ]
+                    ],
+                    "dotsStyleColor" => [
+                        "name" => "dotsStyleColor",
+                        "value" => "#fff",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "dots color",
                         ]
                     ],
                 ]
