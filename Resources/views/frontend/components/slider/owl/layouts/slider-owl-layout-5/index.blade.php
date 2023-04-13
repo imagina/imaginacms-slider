@@ -18,6 +18,10 @@
                         @php
                             $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
                         @endphp
+                    @else
+                        @php
+                            $itemComponentAttributes += ['viewMoreButtonLabel' => $slide->caption ?? trans('isite::common.menu.viewMore') ];
+                        @endphp
                     @endif
                     @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
                 </div>
@@ -28,6 +32,10 @@
                     @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
                         @php
                             $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
+                        @endphp
+                    @else
+                        @php
+                            $itemComponentAttributes += ['viewMoreButtonLabel' => $slide->caption ?? trans('isite::common.menu.viewMore') ];
                         @endphp
                     @endif
                     @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])

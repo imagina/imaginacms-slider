@@ -194,4 +194,11 @@
  }
 @endif
 @endif
+
+@if(!$itemComponentAttributes['withTitle'] && !$itemComponentAttributes['withSummary'] && !$itemComponentAttributes['withCreatedDate'] && !$itemComponentAttributes['withViewMoreButton'] )
+#{{ $slider->system_name }} .image-link {
+    z-index: 1;
+    position: relative;
+}
+@endif
 </style>
