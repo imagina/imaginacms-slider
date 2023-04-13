@@ -99,3 +99,23 @@
   @endforeach
 </div>
 @include("slider::frontend.components.slider.owl.script")
+<style>
+#{{ $slider->system_name }} .cover-image {
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-height: 400px;
+}
+#{{ $slider->system_name }} .cover-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media (max-width: 1199.98px) {
+    #{{ $slider->system_name }} .cover-img {
+        position: relative;
+    }
+}
+</style>

@@ -1,4 +1,4 @@
-.slider-component{
+/*.slider-component{
   overflow: hidden;
   @include media-breakpoint-down(md) {
     height: calc(100vw * (.3)) !important;
@@ -254,7 +254,7 @@
     }
   }
 
-  /***** Media Queries *****/
+
   @include media-breakpoint-up(lg) {
     .carousel-indicators {
       @include translateY-prefixes;
@@ -424,7 +424,7 @@
 
 }
 
-/*OWL*/
+
 .owl-slider-layout-2 {
 
   .cover-image {
@@ -467,7 +467,6 @@
   }
 }
 
-/*
 .owl-slider-layout-5 {
   &.owl-with-dots{
     .owl-dots{
