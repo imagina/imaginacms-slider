@@ -17,6 +17,7 @@ class Owl extends Component
   public $dots;
   public $dotsPosition;
   public $dotsStyle;
+  public $dotsStyleColor;
   public $nav;
   public $navText;
   public $autoplay;
@@ -40,6 +41,8 @@ class Owl extends Component
   public $mouseDrag;
   public $touchDrag;
   public $isMobile;
+  public $navLateralLeftRight;
+  public $navLateralTop;
 
   /**
    * Create a new component instance.
@@ -52,7 +55,9 @@ class Owl extends Component
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
                               $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
-                              $mouseDrag = true, $touchDrag = true)
+                              $mouseDrag = true, $touchDrag = true, $navLateralTop = 50, $navLateralLeftRight = '15px',
+                              $dotsStyleColor = '#fff'
+  )
   {
     $this->id = $id;
     $this->layout = $layout ?? 'slider-owl-layout-1';
@@ -61,6 +66,7 @@ class Owl extends Component
     $this->dots = $dots ?? true;
     $this->dotsPosition = $dotsPosition ?? 'center';
     $this->dotsStyle = $dotsStyle ?? 'line';
+    $this->dotsStyleColor = $dotsStyleColor;
     $this->nav = $nav ?? true;
     $this->navText = json_encode($navText);
     $this->loopOwl = $loop ?? true;
@@ -83,6 +89,8 @@ class Owl extends Component
     $this->navPosition = $navPosition ?? 'lateral';
     $this->mouseDrag = $mouseDrag;
     $this->touchDrag = $touchDrag;
+    $this->navLateralLeftRight = $navLateralLeftRight;
+    $this->navLateralTop = explode(",",$navLateralTop);
     $this->isMobile = isMobileDevice();
   }
 

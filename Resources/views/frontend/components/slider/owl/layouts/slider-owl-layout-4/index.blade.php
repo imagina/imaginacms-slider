@@ -91,3 +91,25 @@
   @endforeach
 </div>
 @include("slider::frontend.components.slider.owl.script")
+<style>
+@switch($imgObjectFit)
+    @case('fill')
+#{{$slider->system_name}} .slider-img__fill {
+    -o-object-fit: fill;
+    object-fit: fill;
+}
+@break
+@case('cover')
+#{{$slider->system_name}} .slider-img__cover {
+     -o-object-fit: cover;
+     object-fit: cover;
+ }
+@break
+@case('contain')
+#{{$slider->system_name}} .slider-img__contain {
+     -o-object-fit: contain;
+     object-fit: contain;
+ }
+@break
+@endswitch
+</style>

@@ -85,3 +85,20 @@
   @endforeach
 </div>
 @include("slider::frontend.components.slider.owl.script")
+<style>
+#{{ $slider->system_name }} .bg-image {
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+}
+#{{ $slider->system_name }} .bg-image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    left: 0;
+    top:0;
+}
+</style>
