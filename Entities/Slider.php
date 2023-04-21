@@ -3,10 +3,12 @@
 use Illuminate\Database\Eloquent\Model;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
+use Modules\Core\Support\Traits\AuditTrait;
+
 class Slider extends Model
 {
   
-  use BelongsToTenant;
+  use BelongsToTenant, AuditTrait;
   
   protected $fillable = [
     'name',

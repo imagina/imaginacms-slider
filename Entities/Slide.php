@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\App;
 use Modules\Page\Entities\Page;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
+use Modules\Core\Support\Traits\AuditTrait;
+
 class Slide extends Model
 {
-  use Translatable, MediaRelation, BelongsToTenant;
+  use Translatable, MediaRelation, BelongsToTenant, AuditTrait;
 
   public $translatedAttributes = [
     'title',
