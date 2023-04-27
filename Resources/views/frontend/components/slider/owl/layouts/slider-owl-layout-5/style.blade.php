@@ -3,6 +3,7 @@
     @if($itemComponentAttributes['layout']=="item-list-layout-7" && $itemComponentAttributes['imagePosition']=="1")
         #{{ $slider->system_name }}Slider {
             aspect-ratio: {{$itemComponentAttributes['imageAspect']}};
+            height: {{$itemComponentAttributes['imageHeight']}};
         }
         @if(!is_null($itemComponentAttributes['imageAspectMobile']))
         @media (max-width: 767.98px) {
@@ -16,13 +17,6 @@
 
 {{-- Style Nav --}}
 @if($nav)
-#{{ $slider->system_name }}.owl-with-nav .owl-nav {
-    position: absolute;
-    left: 15px;
-    right: 15px;
-    display: flex;
-    margin-top: 0;
-}
 #{{ $slider->system_name }}.owl-with-nav .owl-nav .owl-prev:focus,
 #{{ $slider->system_name }}.owl-with-nav .owl-nav .owl-next:focus {
     outline: 0 !important;
@@ -32,23 +26,47 @@
     background: transparent;
 }
 @if($navPosition=='lateral')
-#{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav {
-    justify-content: space-between;
+#{{ $slider->system_name }}.owl-with-nav .owl-nav {
+     margin-top: 0;
+}
+#{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-prev,
+#{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-next  {
+    position: absolute;
     top: {{$navLateralTop[0]}}%;
     transform: translateY(-{{$navLateralTop[0]}}%);
-    left: {{$navLateralLeftRight}};
-    right: {{$navLateralLeftRight}};
+}
+#{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-prev {
+     left: {{$navLateralLeftRight}};
+}
+#{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-next  {
+     right: {{$navLateralLeftRight}};
+     width: auto;
 }
 @media (max-width: 767.98px) {
-    #{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav {
+    @if(count($navLateralTop)==2)
+    #{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-prev,
+    #{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-next  {
+         top: {{$navLateralTop[1]}}%;
+         transform: translateY(-{{$navLateralTop[1]}}%);
+    }
+    @endif
+    #{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-prev {
         left: 15px;
+    }
+    #{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-lateral .owl-nav .owl-next  {
         right: 15px;
-        @if(count($navLateralTop)==2)
-        top: {{$navLateralTop[1]}}%;
-        transform: translateY(-{{$navLateralTop[1]}}%);
-        @endif
     }
 }
+@endif
+@if($navPosition!='lateral')
+#{{ $slider->system_name }}.owl-with-nav .owl-nav {
+     position: absolute;
+     left: 15px;
+     right: 15px;
+     display: flex;
+     margin-top: 0;
+ }
+@endif
 @if($navPosition=='center-bottom')
 #{{ $slider->system_name }}.owl-with-nav.carousel-nav-position-center-bottom .owl-nav {
      justify-content: center;
@@ -68,13 +86,12 @@
 }
 @endif
 @endif
-@endif
 
 {{-- Style Dots --}}
 @if($dots)
 #{{ $slider->system_name }}.owl-with-dots .owl-dots {
      position: absolute;
-     bottom: 0;
+     bottom: {{$dotsBottom}};
      left: 10px;
      right: 10px;
 }
