@@ -43,6 +43,7 @@ class Owl extends Component
   public $isMobile;
   public $navLateralLeftRight;
   public $navLateralTop;
+  public $dotsBottom;
 
   /**
    * Create a new component instance.
@@ -56,7 +57,7 @@ class Owl extends Component
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
                               $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
                               $mouseDrag = true, $touchDrag = true, $navLateralTop = 50, $navLateralLeftRight = '15px',
-                              $dotsStyleColor = '#fff'
+                              $dotsStyleColor = '#fff', $dotsBottom = 0
   )
   {
     $this->id = $id;
@@ -91,6 +92,7 @@ class Owl extends Component
     $this->touchDrag = $touchDrag;
     $this->navLateralLeftRight = $navLateralLeftRight;
     $this->navLateralTop = explode(",",$navLateralTop);
+    $this->dotsBottom = $dotsBottom;
     $this->isMobile = isMobileDevice();
   }
 

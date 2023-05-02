@@ -34,11 +34,11 @@ return [
                     ],
                     "autoplay" => [
                         "name" => "autoplay",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "Repetición automática",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "margin" => [
@@ -52,20 +52,20 @@ return [
                     ],
                     "autoplayHoverPause" => [
                         "name" => "autoplayHoverPause",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "Pausa en repetición automática",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "loop" => [
                         "name" => "loop",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "Loop",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "autoplayTimeOut" => [
@@ -144,7 +144,6 @@ return [
                     "navLateralLeftRight" => [
                         "name" => "navLateralLeftRight",
                         "value" => "15px",
-                        "tooltip" => "sadasd",
                         "type" => "input",
                         "props" => [
                             "label" => "Ancho (nav Lateral)",
@@ -208,6 +207,14 @@ return [
                             "label" => "dots color",
                         ]
                     ],
+                    "dotsBottom" => [
+                        "name" => "dotsBottom",
+                        "value" => "0",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "Bottom",
+                        ]
+                    ]
                 ]
             ]
         ]
