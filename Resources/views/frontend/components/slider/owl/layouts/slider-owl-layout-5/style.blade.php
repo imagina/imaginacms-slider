@@ -3,7 +3,9 @@
     @if($itemComponentAttributes['layout']=="item-list-layout-7" && $itemComponentAttributes['imagePosition']=="1")
         #{{ $slider->system_name }}Slider {
             aspect-ratio: {{$itemComponentAttributes['imageAspect']}};
+            @if(!empty($itemComponentAttributes['imageHeight']))
             height: {{$itemComponentAttributes['imageHeight']}};
+            @endif
         }
         @if(!is_null($itemComponentAttributes['imageAspectMobile']))
         @media (max-width: 767.98px) {
