@@ -1,4 +1,6 @@
-<?php namespace Modules\Slider\Entities;
+<?php
+
+namespace Modules\Slider\Entities;
 
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
@@ -7,10 +9,15 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\App;
 use Modules\Page\Entities\Page;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+use Modules\Isite\Traits\RevisionableTrait;
 
 class Slide extends Model
 {
-  use Translatable, MediaRelation, BelongsToTenant;
+  use Translatable, MediaRelation, BelongsToTenant, RevisionableTrait;
+
+  public $transformer = 'Modules\Slider\Transformers\SlideApiTransformer';
+  public $entity = 'Modules\Slider\Entities\Slide';
+  public $repository = 'Modules\Slider\Repositories\SlideApiRepository';
 
   public $translatedAttributes = [
     'title',

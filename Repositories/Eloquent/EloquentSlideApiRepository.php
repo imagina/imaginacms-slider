@@ -19,7 +19,7 @@ class EloquentSlideApiRepository extends EloquentBaseRepository implements Slide
       $query = $this->model->query();
   
       /*== RELATIONSHIPS ==*/
-      if(in_array('*',$params->include ?? [])){//If Request all relationships
+      if(isset($params->include) && in_array('*',$params->include ?? [])){//If Request all relationships
         $query->with(['translations','files']);
       }else{//Especific relationships
         $includeDefault = ['translations','files'];//Default relationships
@@ -62,6 +62,11 @@ class EloquentSlideApiRepository extends EloquentBaseRepository implements Slide
             ->orWhere('updated_at', 'like', '%' . $filter->search . '%')
             ->orWhere('created_at', 'like', '%' . $filter->search . '%');
             });
+        }
+
+        if (isset($filter->id)) {
+          !is_array($filter->id) ? $filter->id = [$filter->id] : false;
+          $query->where('id', $filter->id);
         }
       }
   
