@@ -34,11 +34,11 @@ return [
                     ],
                     "autoplay" => [
                         "name" => "autoplay",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "Repetición automática",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "margin" => [
@@ -52,20 +52,20 @@ return [
                     ],
                     "autoplayHoverPause" => [
                         "name" => "autoplayHoverPause",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "Pausa en repetición automática",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "loop" => [
                         "name" => "loop",
-                        "value" => "true",
+                        "value" => "1",
                         "type" => "select",
                         "props" => [
                             "label" => "Loop",
-                            "options" => $vAttributes["booleanValidation"]
+                            "options" => $vAttributes["validation"]
                         ]
                     ],
                     "autoplayTimeOut" => [
@@ -141,6 +141,22 @@ return [
                             "label" => "nav text",
                         ]
                     ],
+                    "navLateralLeftRight" => [
+                        "name" => "navLateralLeftRight",
+                        "value" => "15px",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "Ancho (nav Lateral)",
+                        ]
+                    ],
+                    "navLateralTop" => [
+                        "name" => "navLateralTop",
+                        "value" => "50",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "Alto % (nav Lateral)",
+                        ]
+                    ],
                 ]
             ],
             "dots" => [
@@ -183,6 +199,22 @@ return [
                             ]
                         ]
                     ],
+                    "dotsStyleColor" => [
+                        "name" => "dotsStyleColor",
+                        "value" => "#fff",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "dots color",
+                        ]
+                    ],
+                    "dotsBottom" => [
+                        "name" => "dotsBottom",
+                        "value" => "0",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "Bottom",
+                        ]
+                    ]
                 ]
             ]
         ]

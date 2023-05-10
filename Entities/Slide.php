@@ -11,9 +11,12 @@ use Modules\Page\Entities\Page;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 use Modules\Isite\Traits\RevisionableTrait;
 
+use Modules\Core\Support\Traits\AuditTrait;
+
 class Slide extends Model
 {
-  use Translatable, MediaRelation, BelongsToTenant, RevisionableTrait;
+
+  use Translatable, MediaRelation, BelongsToTenant, AuditTrait, RevisionableTrait;
 
   public $transformer = 'Modules\Slider\Transformers\SlideApiTransformer';
   public $entity = 'Modules\Slider\Entities\Slide';
