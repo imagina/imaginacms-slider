@@ -1,4 +1,4 @@
-<div id="{{ $slider->system_name }}-bootstrap-slider-layout-2">
+<div id="{{ $slider->system_name }}-bootstrap-slider-layout-2" class="bootstrap-slider-layout-2">
 
     <div id="{{ $slider->system_name }}" class="carousel slide "
          data-ride="carousel" data-pause="{{ $pause }}">
