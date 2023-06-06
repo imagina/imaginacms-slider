@@ -7,8 +7,7 @@ interface SlideApiRepository extends BaseRepository
     public function index($page, $take, $filter, $include);
     
     public function getItemsBy($params);
-    
-    
+
     public function create($data);
     
     public function show($id,$include);
