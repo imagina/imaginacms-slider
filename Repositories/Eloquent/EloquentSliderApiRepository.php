@@ -15,7 +15,7 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
     $query = $this->model->query();
 
     /*== RELATIONSHIPS ==*/
-    if (in_array('*', $params->include)) {//If Request all relationships
+    if (isset($params->include) && in_array('*', $params->include)) {//If Request all relationships
       $query->with([]);
     } else {//Especific relationships
       $includeDefault = [];//Default relationships
@@ -64,6 +64,11 @@ class EloquentSliderApiRepository extends EloquentBaseRepository implements Slid
       //Filter by slug
       if (isset($filter->systemName)) {
         $query->where('system_name', $filter->systemName);
+      }
+
+      if (isset($filter->id)) {
+        !is_array($filter->id) ? $filter->id = [$filter->id] : false;
+        $query->where('id', $filter->id);
       }
     }
     $entitiesWithCentralData = json_decode(setting("isite::tenantWithCentralData",null,"[]",true));
