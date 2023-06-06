@@ -13,7 +13,7 @@
                   <x-media::single-image :alt="$slide->title ?? Setting::get('core::site-name')"
                                          :title="$slide->title ?? Setting::get('core::site-name')"
                                          :url="$slide->uri ?? $slide->url ?? null" :isMedia="true"
-                                         imgClasses="cover-img slider-img__{{$imgObjectFit}}"
+                                         imgClasses="cover-img slider-img__{{$imgObjectFit}}" fetchPriority="high"
                                          :mediaFiles="$slide->mediaFiles()" zone="slideimage"/>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                   <x-media::single-image :alt="$slide->title ?? Setting::get('core::site-name')"
                                          :title="$slide->title ?? Setting::get('core::site-name')"
                                          :url="$slide->uri ?? $slide->url ?? null" :isMedia="true"
-                                         imgClasses="cover-img slider-img__{{$imgObjectFit}}"
+                                         imgClasses="cover-img slider-img__{{$imgObjectFit}}" fetchPriority="high"
                                          :mediaFiles="$slide->mediaFiles()" zone="slideimage"/>
                 </div>
               </div>

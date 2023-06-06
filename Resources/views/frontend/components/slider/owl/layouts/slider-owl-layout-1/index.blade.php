@@ -32,7 +32,7 @@
                                        :title="$slide->title ?? Setting::get('core::site-name')"
                                        :url="$slide->uri ?? $slide->url ?? null" :isMedia="true"
                                        imgClasses="d-block h-100 slider-img__{{$imgObjectFit}}"
-                                       width="100%"
+                                       width="100%" fetchPriority="high"
                                        :mediaFiles="$slide->mediaFiles()" zone="slideimage"/>
               @endif
               @if(!empty($slide->title) || !empty($slide->caption) || !empty($slide->custom_html))
@@ -104,7 +104,7 @@
                                        :title="$slide->title ?? Setting::get('core::site-name')"
                                        :url="$slide->uri ?? $slide->url ?? null" :isMedia="true"
                                        imgClasses="d-block h-100 slider-img__{{$imgObjectFit}}"
-                                       width="100%"
+                                       width="100%" fetchPriority="high"
                                        :mediaFiles="$slide->mediaFiles()" zone="slideimage"/>
               @endif
               @if(!empty($slide->title) || !empty($slide->caption) || !empty($slide->custom_html))

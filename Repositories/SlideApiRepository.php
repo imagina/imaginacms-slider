@@ -13,8 +13,10 @@ interface SlideApiRepository extends BaseRepository
     
     public function show($id,$include);
     
-    public function deleteBy($criteria, $params);
+    public function getItem($criteria, $params = false);
     
-    public function updateBy($criteria, $data, $params);
+    public function deleteBy($criteria, $params = false);
+    
+    public function updateBy($criteria, $data, $params = false);
     
 }
