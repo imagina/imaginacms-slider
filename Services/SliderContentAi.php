@@ -9,6 +9,7 @@ use Modules\Isite\Services\AiService;
 class SliderContentAi
 {
   public $aiService;
+  private $log = "Slider: Services|SliderContentAi|";
 
   function __construct()
   {
@@ -16,7 +17,9 @@ class SliderContentAi
   }
 
   public function getSlides($quantity = 2)
-  {
+  { 
+    \Log::info($this->log."getSlides|INIT");
+
     //instance the prompt to generate the posts
     $prompt = "Contenido llamativo para slides rotatorios de una pagina WEB con los siguientes atributos ";
     //Instance attributes
@@ -25,6 +28,7 @@ class SliderContentAi
       "caption: texto corto de maximo 2 palabras que pueda ser usado para un boton el slide, {$this->aiService->translatablePrompt} ";
     //Call IA Service
     $response = $this->aiService->getContent($prompt, $quantity);
+    \Log::info($this->log."getSlides|END");
     //Return response
     return $response;
   }
