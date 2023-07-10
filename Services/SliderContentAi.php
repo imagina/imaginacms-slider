@@ -4,15 +4,15 @@
 namespace Modules\Slider\Services;
 
 use Illuminate\Http\Request;
-use Modules\Isite\Services\IAService;
+use Modules\Isite\Services\AiService;
 
-class SliderContentIA
+class SliderContentAi
 {
-  public $iaService;
+  public $aiService;
 
   function __construct()
   {
-    $this->iaService = new IAService();
+    $this->aiService = new AiService();
   }
 
   public function getSlides($quantity = 2)
@@ -20,11 +20,11 @@ class SliderContentIA
     //instance the prompt to generate the posts
     $prompt = "Contenido llamativo para slides rotatorios de una pagina WEB con los siguientes atributos ";
     //Instance attributes
-    $prompt .= $this->iaService->getStandardPrompts(["title", "summary"]) .
+    $prompt .= $this->aiService->getStandardPrompts(["title", "summary"]) .
       "custom_html: Que contenga entre 200 y 300 palabras, el texto sea en formato HTML, {$this->iaService->translatablePrompt} " .
       "caption: texto corto de maximo 2 palabras que pueda ser usado para un boton el slide, {$this->iaService->translatablePrompt} ";
     //Call IA Service
-    $response = $this->iaService->getContent($prompt, $quantity);
+    $response = $this->aiService->getContent($prompt, $quantity);
     //Return response
     return $response;
   }
