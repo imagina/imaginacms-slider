@@ -44,7 +44,6 @@ class EloquentSlideRepository extends EloquentBaseRepository implements SlideRep
         $includeDefault = array_merge($includeDefault, $params->include);
       $query->with($includeDefault);//Add Relationships to query
     }
-    
     /*== FILTERS ==*/
     if (isset($params->filter)) {
       $filter = $params->filter;//Short filter
@@ -107,6 +106,13 @@ class EloquentSlideRepository extends EloquentBaseRepository implements SlideRep
     /*== FIELDS ==*/
     if (isset($params->fields) && count($params->fields))
       $query->select($params->fields);
+
+    if (isset($params->setting) && isset($params->setting->fromAdmin) && $params->setting->fromAdmin) {
+
+    } else {
+      //Pre filters by default
+      $this->defaultPreFilters($query, $params);
+    }
     
     /*== REQUEST ==*/
     if (isset($params->page) && $params->page) {
@@ -116,5 +122,18 @@ class EloquentSlideRepository extends EloquentBaseRepository implements SlideRep
       return $query->get();
     }
   }
+  public function defaultPreFilters($query, $params)
+  {
 
+//    //pre-filter date_available
+//    $query->where(function ($query) {
+//      $query->where("date_available", "<=", date("Y-m-d", strtotime(now())));
+//      $query->orWhereNull("date_available");
+//    });
+
+    //pre-filter status
+    $query->whereRaw("id IN (SELECT slide_id from slider__slide_translations where active = 1)");
+
+
+  }
 }
