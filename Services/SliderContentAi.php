@@ -14,7 +14,7 @@ class SliderContentAi
   private $slideRepository;
   private $maxAttempts;
   private $slideQuantity;
-  private $systemName = "principal";
+  private $systemName = "sliderHome";
 
   function __construct($maxAttempts = 3, $slideQuantity = 2)
   {
