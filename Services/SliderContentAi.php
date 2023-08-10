@@ -15,6 +15,7 @@ class SliderContentAi
   private $maxAttempts;
   private $slideQuantity;
   private $systemName = "sliderHome";
+  private $fileService;
 
   function __construct($maxAttempts = 3, $slideQuantity = 2)
   {
@@ -23,6 +24,7 @@ class SliderContentAi
     $this->slideQuantity = $slideQuantity;
     $this->sliderRepository = app("Modules\Slider\Repositories\SliderApiRepository");
     $this->slideRepository = app("Modules\Slider\Repositories\SlideApiRepository");
+    $this->fileService = app("Modules\Media\Services\FileService");
   }
 
   public function getSlides($quantity = 2)
@@ -32,7 +34,7 @@ class SliderContentAi
     //instance the prompt to generate the posts
     $prompt = "Contenido llamativo para slides rotatorios de una pagina WEB con los siguientes atributos ";
     //Instance attributes
-    $prompt .= $this->aiService->getStandardPrompts(["title", "summary"]) .
+    $prompt .= $this->aiService->getStandardPrompts(["title", "summary", "tags"]) .
       "custom_html: Que contenga entre 200 y 300 palabras, el texto sea en formato HTML, {$this->aiService->translatablePrompt} " .
       "caption: texto corto de maximo 2 palabras que pueda ser usado para un boton el slide, {$this->aiService->translatablePrompt} ";
     //Call IA Service
@@ -101,10 +103,19 @@ class SliderContentAi
       $slide['slider_id'] = $slider->id;
       $slide['type'] = NULL;
 
+      // Image Process
+      if(isset($slide['image'])){
+        $file = $this->saveImage($slide['image'][0]);
+        $slide['medias_single']['slideimage'] = $file->id;
+      }
+
+      //Delete data from AI
+      if(isset($slide['tags'])) unset($slide['tags']);
+      if(isset($slide['image'])) unset($slide['image']);
+
+
       $result = $this->slideRepository->create($slide);
 
-      //TODO
-      //Proceso to create image
 
     }
   }
@@ -117,6 +128,23 @@ class SliderContentAi
 
     \Log::info($this->log."deleteOldSlides");
     $slider->slides()->delete();
+
+  }
+
+  /**
+   * Save image from AI
+   */
+  public function saveImage($image)
+  {
+
+    \Log::info($this->log."saveImage");
+    
+    $path = $image->url;
+    $provider = $image->provider;
+
+    $fileCreated = $this->fileService->storeHotLinked($path,$provider);
+
+    return $fileCreated;
 
   }
 
