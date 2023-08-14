@@ -17,10 +17,10 @@ class SliderContentAi
   private $systemName = "sliderHome";
   private $fileService;
 
-  function __construct($maxAttempts = 3, $slideQuantity = 2)
+  function __construct($slideQuantity = 2)
   {
     $this->aiService = new AiService();
-    $this->maxAttempts = $maxAttempts;
+    $this->maxAttempts = (int)setting("isite::n8nMaxAttempts", null, 3);
     $this->slideQuantity = $slideQuantity;
     $this->sliderRepository = app("Modules\Slider\Repositories\SliderApiRepository");
     $this->slideRepository = app("Modules\Slider\Repositories\SlideApiRepository");
