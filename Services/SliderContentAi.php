@@ -50,6 +50,9 @@ class SliderContentAi
 
     \Log::info($this->log."startProcesses");
 
+    //Show infor in log
+    //showDataConnection();
+
     $newData = $this->getNewData();
     if(!is_null($newData)){
 
@@ -57,8 +60,12 @@ class SliderContentAi
       $params = ["filter" => ["field" => "system_name"]];
       $slider = $this->sliderRepository->getItem($this->systemName,json_decode(json_encode($params)));
 
-      $this->deleteOldSlides($slider);
-      $this->createSlides($newData,$slider);
+      if(!is_null($slider)){
+        $this->deleteOldSlides($slider);
+        $this->createSlides($newData,$slider);
+      }else{
+        \Log::info($this->log."startProcesses|Not Slider to update");
+      }
       
     }
 
