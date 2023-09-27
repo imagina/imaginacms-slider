@@ -4,15 +4,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class SlideTranslation extends Model
 {
-    public $fillable = [
-        'title',
-        'caption',
-        'uri',
-        'url',
-        'active',
-        'custom_html',
-        'summary',
-    ];
+  public $fillable = [
+    'title',
+    'caption',
+    'uri',
+    'url',
+    'active',
+    'custom_html',
+    'summary',
+    'code_ads'
+  ];
 
-    protected $table = 'slider__slide_translations';
+  protected $table = 'slider__slide_translations';
 }

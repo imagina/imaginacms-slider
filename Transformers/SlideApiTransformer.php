@@ -29,6 +29,7 @@ class SlideApiTransformer extends JsonResource
       'imageUrl' => $this->getImageUrl(),
       'mediaFiles' => $this->mediaFiles(),
       'revisions' => RevisionTransformer::collection($this->whenLoaded('revisions')),
+      'codeAds' => $this->code_ads
     ];
 
     $filter = json_decode($request->filter);
@@ -53,6 +54,8 @@ class SlideApiTransformer extends JsonResource
           $this->translate("$lang")['active'] ? 1 : 0 : '';
         $data[$lang]['customHtml'] = $this->hasTranslation($lang) ?
           ($this->translate("$lang")['custom_html'] ? $this->translate("$lang")['custom_html'] : '') : '';
+        $data[$lang]['codeAds'] = $this->hasTranslation($lang) ?
+          $this->translate("$lang")['code_ads'] : '';
       }
     }
 

@@ -19,6 +19,7 @@ class SliderApiTransformer extends JsonResource
       'options' => $this->when($this->options, $this->options),
       'slides' => SlideApiTransformer::collection($this->slides),
       'revisions' => RevisionTransformer::collection($this->whenLoaded('revisions')),
+      'type' => $this->type
     ];
   }
 }

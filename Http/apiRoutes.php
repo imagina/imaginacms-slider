@@ -23,4 +23,7 @@ $router->group(['prefix' => '/slider/v1'], function (Router $router) {
   
   //======  SLIDES
   require('ApiRoutes/slideRoutes.php');
+
+  //======  TYPES
+  require('ApiRoutes/typeRoutes.php');
 });

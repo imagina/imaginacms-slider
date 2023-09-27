@@ -30,6 +30,7 @@ class Slide extends Model
     'active',
     'custom_html',
     'summary',
+    'code_ads'
   ];
 
   protected $fillable = [

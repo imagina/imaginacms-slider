@@ -21,7 +21,8 @@ class Slider extends Model
     'name',
     'system_name',
     'options',
-    'active'
+    'active',
+    'type'
   ];
   protected $fakeColumns = ['options'];
 
