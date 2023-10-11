@@ -105,8 +105,8 @@ class SliderApiController extends BaseApiController
     try {
       //Get data
     $data = $request->input('attributes');
-    $data['name'] = str_replace(" ", "_", $data['name']);
-    $data['system_name'] = uniqid($data["name"]."_type"."_".$data["type"] ?? ""."_");
+    $name = strtolower(str_replace(" ", "_", $data['name']));
+    $data['system_name'] = uniqid($name."_type"."_".$data["type"] ?? ""."_");
     //Validate Request
     // $this->validateRequestApi(new CustomRequest((array)$data));
 
