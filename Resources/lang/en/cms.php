@@ -2,7 +2,7 @@
 
 return [
   "sidebar" => [
-    "adminSlider" => "Sliders",
+    "adminSlider" => "Sliders/Banners",
     "adminSliderEdit" => "Edit Slider"
   ],
   "newSlider" => "New Slider",
