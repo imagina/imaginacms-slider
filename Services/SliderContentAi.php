@@ -112,11 +112,16 @@ class SliderContentAi
       if(isset($slide['image'])){
         $file = $this->aiService->saveImage($slide['image'][0]);
         $slide['medias_single']['slideimage'] = $file->id;
+      }else{
+        \Log::info($this->log."createSlides|Not exist image");
       }
 
       //Delete data from AI
       if(isset($slide['tags'])) unset($slide['tags']);
       if(isset($slide['image'])) unset($slide['image']);
+
+      if(isset($slide['es']['title']))
+          \Log::info($this->log."createSlides|Title: ".$slide['es']['title']);
 
 
       $result = $this->slideRepository->create($slide);
