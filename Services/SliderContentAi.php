@@ -33,8 +33,8 @@ class SliderContentAi
     $prompt = "Contenido llamativo para slides rotatorios de una pagina WEB con los siguientes atributos ";
     //Instance attributes
     $prompt .= $this->aiService->getStandardPrompts(["title", "summary", "tags"]) .
-      "custom_html: Que contenga entre 200 y 300 palabras, el texto sea en formato HTML, {$this->aiService->translatablePrompt} " .
-      "caption: texto corto de maximo 2 palabras que pueda ser usado para un boton el slide, {$this->aiService->translatablePrompt} ";
+      "custom_html: Que contenga entre 200 y 300 palabras, el texto sea en formato HTML, {$this->aiService->translatablePrompt}. " .
+      "caption: texto corto de maximo 2 palabras que pueda ser usado para un boton el slide, {$this->aiService->translatablePrompt}.";
     //Call IA Service
     $response = $this->aiService->getContent($prompt, $quantity);
     \Log::info($this->log."getSlides|END");
@@ -123,6 +123,8 @@ class SliderContentAi
       if(isset($slide['es']['title']))
           \Log::info($this->log."createSlides|Title: ".$slide['es']['title']);
 
+      //\Log::info($this->log."createSlides|DataToSave: ".json_encode($slide));
+      
 
       $result = $this->slideRepository->create($slide);
 
