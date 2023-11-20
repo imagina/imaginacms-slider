@@ -19,6 +19,7 @@
             </div>
           @else
             <div class="slide">
+              @php $itemComponentAttributes += ['itemComponentTarget' => $slide->target] @endphp
               @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
                 @php
                   $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
@@ -40,6 +41,7 @@
             </div>
           @else
             <div class="slide">
+              @php $itemComponentAttributes += ['itemComponentTarget' => $slide->target] @endphp
               @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
                 @php
                   $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
