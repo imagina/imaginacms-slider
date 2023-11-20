@@ -63,6 +63,10 @@ class SliderContentAi
       if(!is_null($slider)){
         $this->deleteOldSlides($slider);
         $this->createSlides($newData,$slider);
+
+        //Set the process has completed
+        $this->aiService->saveAiCompleted("slider");
+
       }else{
         \Log::info($this->log."startProcesses|Not Slider to update");
       }
