@@ -11,7 +11,6 @@
   <div id="{{ $slider->system_name }}"
        class="owl-carousel owl-theme owl-slider-layout-5 {{ $nav ? ' owl-with-nav carousel-nav-position-'.$navPosition : '' }} {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
     @foreach($slider->slides as $index => $slide)
-      @if($isMobile)
         @if($slide->responsive != 2)
           @if(isset($slide->code_ads) && !is_null($slide->code_ads))
             <div class="banner-{{$slide->id}} py-3">
@@ -33,7 +32,6 @@
             </div>
           @endif
         @endif
-      @else
         @if($slide->responsive != 3)
           @if(isset($slide->code_ads) && !is_null($slide->code_ads))
             <div class="banner-{{$slide->id}} py-3">
@@ -55,7 +53,6 @@
             </div>
           @endif
         @endif
-      @endif
     @endforeach
   </div>
 </div>
