@@ -40,7 +40,6 @@ class Owl extends Component
   public $navPosition;
   public $mouseDrag;
   public $touchDrag;
-  public $isMobile;
   public $navLateralLeftRight;
   public $navLateralTop;
   public $dotsBottom;
@@ -93,7 +92,6 @@ class Owl extends Component
     $this->navLateralLeftRight = $navLateralLeftRight;
     $this->navLateralTop = explode(",",$navLateralTop);
     $this->dotsBottom = $dotsBottom;
-    $this->isMobile = isMobileDevice();
   }
 
   
