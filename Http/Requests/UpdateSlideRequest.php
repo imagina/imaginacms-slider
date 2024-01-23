@@ -1,10 +1,17 @@
-<?php namespace Modules\Slider\Http\Requests;
+<?php
 
-use Illuminate\Foundation\Http\FormRequest;
+namespace Modules\Slider\Http\Requests;
 
-class UpdateSlideRequest extends FormRequest
+use Modules\Core\Internationalisation\BaseFormRequest;
+
+class UpdateSlideRequest extends BaseFormRequest
 {
     public function rules()
+    {
+        return [];
+    }
+
+    public function translationRules()
     {
         return [];
     }
@@ -17,5 +24,14 @@ class UpdateSlideRequest extends FormRequest
     public function messages()
     {
         return [];
+    }
+
+    public function translationMessages()
+    {
+        return [];
+    }
+
+    public function getValidator(){
+        return $this->getValidatorInstance();
     }
 }

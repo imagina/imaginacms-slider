@@ -1,4 +1,6 @@
-<?php namespace Modules\Slider\Providers;
+<?php
+
+namespace Modules\Slider\Providers;
 
 use Modules\Core\Providers\RoutingServiceProvider as CoreRoutingServiceProvider;
 
@@ -23,7 +25,7 @@ class RouteServiceProvider extends CoreRoutingServiceProvider
      */
     protected function getBackendRoute()
     {
-        return __DIR__ . '/../Http/backendRoutes.php';
+        return false;
     }
 
     /**

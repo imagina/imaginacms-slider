@@ -18,32 +18,43 @@ use Modules\Slider\Repositories\Eloquent\EloquentSliderRepository;
 
 class SliderServiceProvider extends ServiceProvider
 {
-  use CanPublishConfiguration;
+    use CanPublishConfiguration;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
-  /**
-   * Indicates if loading of the provider is deferred.
-   *
-   * @var bool
-   */
-  protected $defer = false;
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerBindings();
+        $this->app['events']->listen(BuildingSidebar::class, RegisterSliderSidebar::class);
 
-  /**
-   * Register the service provider.
-   *
-   * @return void
-   */
-  public function register()
-  {
-    $this->registerBindings();
-  }
+        $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
+            // append translations
+        });
+
+
+    }
 
   /**
    * Register all online sliders on the Pingpong/Menu package
    */
-  public function boot()
-  {
-    $this->publishConfig('slider', 'config');
-    $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'permissions'), "asgard.slider.permissions");
+    public function boot()
+    {
+       
+        $this->publishConfig('slider', 'config');
+        $this->publishConfig('slider', 'crud-fields');
+
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'settings'), "asgard.slider.settings");
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'settings-fields'), "asgard.slider.settings-fields");
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'permissions'), "asgard.slider.permissions");
     $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsPages'), "asgard.slider.cmsPages");
     $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsSidebar'), "asgard.slider.cmsSidebar");
     $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'blocks'), "asgard.slider.blocks");
@@ -54,78 +65,64 @@ class SliderServiceProvider extends ServiceProvider
 
     $this->registerComponents();
 
-  }
+    }
 
-  /**
-   * Get the services provided by the provider.
-   *
-   * @return array
-   */
-  public function provides()
-  {
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
     return array('sliders');
-  }
+    }
 
   /**
    * Register class binding
    */
-  private function registerBindings()
-  {
-    $this->app->bind(
-      'Modules\Slider\Repositories\SliderRepository',
-      function () {
-        $repository = new EloquentSliderRepository(new Slider());
+    private function registerBindings()
+    {
+        $this->app->bind(
+            'Modules\Slider\Repositories\SliderRepository',
+            function () {
+                $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSliderRepository(new \Modules\Slider\Entities\Slider());
 
-        if (!config('app.cache')) {
-          return $repository;
-        }
+                if (! config('app.cache')) {
+                    return $repository;
+                }
 
-        return new CacheSliderDecorator($repository);
-      }
-    );
-
-    $this->app->bind(
-      'Modules\Slider\Repositories\SlideRepository',
-      function () {
-        $repository = new EloquentSlideRepository(new Slide());
-
-        if (!config('app.cache')) {
-          return $repository;
-        }
-
-        return new CacheSlideDecorator($repository);
-      }
-    );
-
-    $this->app->bind(
-      'Modules\Slider\Repositories\SlideApiRepository',
-      function () {
-        $repository = new EloquentSlideApiRepository(new Slide());
-
-        if (!config('app.cache')) {
-          return $repository;
-        }
-
-        return new CacheSlideApiDecorator($repository);
-      }
-    );
-
+                return new \Modules\Slider\Repositories\Cache\CacheSliderDecorator($repository);
+            }
+        );
       $this->app->bind(
-          'Modules\Slider\Repositories\SliderApiRepository',
-          function () {
-              $repository = new EloquentSliderApiRepository(new Slider());
-
-              if (!config('app.cache')) {
-                  return $repository;
-              }
-
-              return new CacheSliderApiDecorator($repository);
+        'Modules\Slider\Repositories\SlideRepository',
+        function () {
+          $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSlideRepository(new \Modules\Slider\Entities\Slide());
+      
+          if (! config('app.cache')) {
+            return $repository;
           }
+      
+          return new \Modules\Slider\Repositories\Cache\CacheSlideDecorator($repository);
+        }
       );
+      $this->app->bind(
+        'Modules\Slider\Repositories\SlideApiRepository',
+        function () {
+          $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSlideRepository(new \Modules\Slider\Entities\Slide());
+      
+          if (! config('app.cache')) {
+            return $repository;
+          }
+
+          return new \Modules\Slider\Repositories\Cache\CacheSlideDecorator($repository);
+        }
+      );
+// add bindings
 
 
     $this->app->bind('Modules\Slider\Presenters\SliderPresenter');
-  }
+    }
 
   /**
    * Register the active sliders
