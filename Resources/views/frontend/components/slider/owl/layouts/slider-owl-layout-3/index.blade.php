@@ -2,7 +2,7 @@
      class="owl-carousel owl-theme owl-slider-layout-3 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
   @foreach($slides as $index => $slide)
     @if($slide->active)
-      @if($slide->responsive != 2)
+      @if(isset($slide->responsive) && $slide->responsive != 2)
         <div class="card card-item border-0">
           <div class="row align-items-center">
             <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
@@ -46,7 +46,7 @@
           </div>
         </div>
       @endif
-      @if($slide->responsive != 3)
+      @if(isset($slide->responsive) && $slide->responsive != 3)
         <div class="card card-item border-0">
           <div class="row align-items-center">
             <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"

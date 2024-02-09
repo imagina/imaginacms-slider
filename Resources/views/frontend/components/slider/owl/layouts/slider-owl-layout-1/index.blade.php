@@ -2,7 +2,7 @@
      class="owl-carousel owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
   @foreach($slides as $index => $slide)
     @if($slide->active)
-      @if($slide->responsive != 2)
+      @if(isset($slide->responsive) && $slide->responsive != 2)
         @switch($slide->type)
           @case("video")
           <div class="item h-100">
@@ -77,7 +77,7 @@
           @break
         @endswitch
       @endif
-      @if($slide->responsive != 3)
+      @if(isset($slide->responsive) && $slide->responsive != 3)
         @switch($slide->type)
           @case("video")
           <div class="item h-100">
