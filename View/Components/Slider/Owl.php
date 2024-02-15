@@ -43,6 +43,7 @@ class Owl extends Component
   public $navLateralLeftRight;
   public $navLateralTop;
   public $dotsBottom;
+  public $isMobile;
 
   /**
    * Create a new component instance.
@@ -92,6 +93,7 @@ class Owl extends Component
     $this->navLateralLeftRight = $navLateralLeftRight;
     $this->navLateralTop = explode(",",$navLateralTop);
     $this->dotsBottom = $dotsBottom;
+    $this->isMobile = isMobileDevice();
   }
 
   
