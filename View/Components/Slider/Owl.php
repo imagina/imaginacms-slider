@@ -6,86 +6,51 @@ use Illuminate\View\Component;
 
 class Owl extends Component
 {
-    public $id;
 
-    public $layout;
+  public $id;
+  public $layout;
+  public $slider;
+  public $view;
+  public $height;
+  public $margin;
+  public $loopOwl; //renamed because the $loop is reserved into de blade @foreach
+  public $dots;
+  public $dotsPosition;
+  public $dotsStyle;
+  public $dotsStyleColor;
+  public $nav;
+  public $navText;
+  public $autoplay;
+  public $autoplayHoverPause;
+  public $autoplayTimeout;
+  public $containerFluid;
+  public $imgObjectFit;
+  public $responsive;
+  public $responsiveClass;
+  public $orderClasses;
+  public $editLink;
+  public $tooltipEditLink;
+  public $withViewMoreButton;
+  public $stagePadding;
+  public $container;
+  public $slides;
+  public $itemComponentAttributes;
+  public $itemComponentNamespace;
+  public $itemComponent;
+  public $navPosition;
+  public $mouseDrag;
+  public $touchDrag;
+  public $navLateralLeftRight;
+  public $navLateralTop;
+  public $dotsBottom;
+  public $isMobile;
 
-    public $slider;
-
-    public $view;
-
-    public $height;
-
-    public $margin;
-
-    public $loopOwl; //renamed because the $loop is reserved into de blade @foreach
-
-    public $dots;
-
-    public $dotsPosition;
-
-    public $dotsStyle;
-
-    public $dotsStyleColor;
-
-    public $nav;
-
-    public $navText;
-
-    public $autoplay;
-
-    public $autoplayHoverPause;
-
-    public $autoplayTimeout;
-
-    public $containerFluid;
-
-    public $imgObjectFit;
-
-    public $responsive;
-
-    public $responsiveClass;
-
-    public $orderClasses;
-
-    public $editLink;
-
-    public $tooltipEditLink;
-
-    public $withViewMoreButton;
-
-    public $stagePadding;
-
-    public $container;
-
-    public $slides;
-
-    public $itemComponentAttributes;
-
-    public $itemComponentNamespace;
-
-    public $itemComponent;
-
-    public $navPosition;
-
-    public $mouseDrag;
-
-    public $touchDrag;
-
-    public $isMobile;
-
-    public $navLateralLeftRight;
-
-    public $navLateralTop;
-
-    public $dotsBottom;
-
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct($id, $layout = 'slider-owl-layout-1', $height = '500px', $autoplay = true, $margin = 0,
+  /**
+   * Create a new component instance.
+   *
+   * @return void
+   */
+  public function __construct($id, $layout = 'slider-owl-layout-1', $height = '500px', $autoplay = true, $margin = 0,
                               $autoplayHoverPause = true, $loop = true, $dots = true, $dotsPosition = 'center',
                               $dotsStyle = 'line', $nav = true, $navText = '', $autoplayTimeout = 10000, $imgObjectFit = 'cover',
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,

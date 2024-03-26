@@ -63,6 +63,10 @@ class SliderContentAi
       if(!is_null($slider)){
         $this->deleteOldSlides($slider);
         $this->createSlides($newData,$slider);
+
+        //Set the process has completed
+        $this->aiService->saveAiCompleted("slider");
+
       }else{
         \Log::info($this->log."startProcesses|Not Slider to update");
       }
@@ -112,11 +116,18 @@ class SliderContentAi
       if(isset($slide['image'])){
         $file = $this->aiService->saveImage($slide['image'][0]);
         $slide['medias_single']['slideimage'] = $file->id;
+      }else{
+        \Log::info($this->log."createSlides|Not exist image");
       }
 
       //Delete data from AI
       if(isset($slide['tags'])) unset($slide['tags']);
       if(isset($slide['image'])) unset($slide['image']);
+
+      if(isset($slide['es']['title']))
+          \Log::info($this->log."createSlides|Title: ".$slide['es']['title']);
+
+      //\Log::info($this->log."createSlides|DataToSave: ".json_encode($slide));
 
 
       $result = $this->slideRepository->create($slide);

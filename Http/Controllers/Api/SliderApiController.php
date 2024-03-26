@@ -92,20 +92,23 @@ class SliderApiController extends BaseApiController
         return response()->json($response, $status ?? 200);
     }
 
-        /**
-         * CREATE A ITEM
-         *
-         * @return mixed
-         */
-        public function create(Request $request)
-        {
-            \DB::beginTransaction();
-            try {
-                //Get data
-                $data = $request->input('attributes');
+  /**
+   * CREATE A ITEM
+   *
+   * @param Request $request
+   * @return mixed
+   */
+  public function create(Request $request)
+  {
 
-                //Validate Request
-                // $this->validateRequestApi(new CustomRequest((array)$data));
+    \DB::beginTransaction();
+    try {
+      //Get data
+    $data = $request->input('attributes');
+    $name = strtolower(str_replace(" ", "_", $data['name']));
+    $data['system_name'] = uniqid($name."_type"."_".$data["type"] ?? ""."_");
+    //Validate Request
+    // $this->validateRequestApi(new CustomRequest((array)$data));
 
                 //Create item
                 $this->slider->create($data);
