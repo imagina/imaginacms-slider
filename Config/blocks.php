@@ -97,7 +97,7 @@ return [
                     ],
                     "responsive" => [
                         "name" => "responsive",
-                        "value" => [0 => ["items" => 1], 640 => ["items" => 1], 992 => ["items" => 1]],
+                        "value" => [0 => ["items" => 1]],
                         "type" => "json",
                         'columns' => 'col-12',
                         "props" => [
