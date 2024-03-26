@@ -95,15 +95,15 @@ return [
                             "options" => $vAttributes["booleanValidation"]
                         ]
                     ],
-                    /*"responsive" => [
+                    "responsive" => [
                         "name" => "responsive",
-                        "value" => [0 => ["items" => 0]],
+                        "value" => [0 => ["items" => 1], 640 => ["items" => 1], 992 => ["items" => 1]],
                         "type" => "json",
                         'columns' => 'col-12',
                         "props" => [
                             "label" => "Responsive"
                         ]
-                    ]*/
+                    ],
                 ]
             ],
             "nav" => [
