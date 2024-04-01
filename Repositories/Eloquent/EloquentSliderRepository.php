@@ -1,7 +1,7 @@
 <?php
 
-namespace Modules\Slider\Repositories\Eloquent;
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 use Modules\Slider\Entities\Slider;
 use Modules\Slider\Repositories\SliderRepository;

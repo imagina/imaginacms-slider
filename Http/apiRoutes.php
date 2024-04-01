@@ -10,15 +10,18 @@ Route::prefix('/slider/v1')->group(function (Router $router) {
         'middleware' => 'token-can:slider.slides.update',
     ]);
 
-    $router->post('/delete', [
-        'as' => 'api.slide.delete',
-        'uses' => 'SlideController@delete',
-        'middleware' => 'token-can:slider.slides.destroy',
-    ]);
+  $router->post('/delete', [
+    'as' => 'api.slide.delete',
+    'uses' => 'SlideController@delete',
+    'middleware' => 'token-can:slider.slides.destroy'
+  ]);
 
-    //======  SLIDERS
-    require 'ApiRoutes/sliderRoutes.php';
+  //======  SLIDERS
+  require('ApiRoutes/sliderRoutes.php');
 
-    //======  SLIDES
-    require 'ApiRoutes/slideRoutes.php';
+  //======  SLIDES
+  require('ApiRoutes/slideRoutes.php');
+
+  //======  TYPES
+  require('ApiRoutes/typeRoutes.php');
 });

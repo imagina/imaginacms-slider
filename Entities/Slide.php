@@ -2,15 +2,16 @@
 
 namespace Modules\Slider\Entities;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\URL;
-use Modules\Core\Support\Traits\AuditTrait;
-use Modules\Isite\Traits\RevisionableTrait;
 use Modules\Media\Support\Traits\MediaRelation;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\App;
 use Modules\Page\Entities\Page;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+use Modules\Isite\Traits\RevisionableTrait;
+
+use Modules\Core\Support\Traits\AuditTrait;
 
 class Slide extends Model
 {
@@ -22,15 +23,16 @@ class Slide extends Model
 
     public $repository = 'Modules\Slider\Repositories\SlideApiRepository';
 
-    public $translatedAttributes = [
-        'title',
-        'caption',
-        'uri',
-        'url',
-        'active',
-        'custom_html',
-        'summary',
-    ];
+  public $translatedAttributes = [
+    'title',
+    'caption',
+    'uri',
+    'url',
+    'active',
+    'custom_html',
+    'summary',
+    'code_ads'
+  ];
 
     protected $fillable = [
         'slider_id',

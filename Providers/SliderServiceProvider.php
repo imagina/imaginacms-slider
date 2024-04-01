@@ -35,16 +35,17 @@ class SliderServiceProvider extends ServiceProvider
         $this->registerBindings();
     }
 
-    /**
-     * Register all online sliders on the Pingpong/Menu package
-     */
-    public function boot()
-    {
-        $this->publishConfig('slider', 'config');
-        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'permissions'), 'asgard.slider.permissions');
-        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsPages'), 'asgard.slider.cmsPages');
-        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsSidebar'), 'asgard.slider.cmsSidebar');
-        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'blocks'), 'asgard.slider.blocks');
+  /**
+   * Register all online sliders on the Pingpong/Menu package
+   */
+  public function boot()
+  {
+    $this->publishConfig('slider', 'config');
+    $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'permissions'), "asgard.slider.permissions");
+    $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsPages'), "asgard.slider.cmsPages");
+    $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsSidebar'), "asgard.slider.cmsSidebar");
+    $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'blocks'), "asgard.slider.blocks");
+    $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'gamification'), "asgard.slider.gamification");
 
         $this->registerSliders();
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'slider');
