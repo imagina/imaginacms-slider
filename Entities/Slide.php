@@ -3,25 +3,33 @@
 namespace Modules\Slider\Entities;
 
 use Astrotomic\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Media\Support\Traits\MediaRelation;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\App;
-use Modules\Page\Entities\Page;
+use Modules\Core\Icrud\Entities\CrudModel;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
-use Modules\Isite\Traits\RevisionableTrait;
+use Modules\Media\Support\Traits\MediaRelation;
+use Modules\Page\Entities\Page;
 
-use Modules\Core\Support\Traits\AuditTrait;
-
-class Slide extends Model
+class Slide extends CrudModel
 {
+  use Translatable, MediaRelation, BelongsToTenant;
 
-  use Translatable, MediaRelation, BelongsToTenant, AuditTrait, RevisionableTrait;
-
-  public $transformer = 'Modules\Slider\Transformers\SlideApiTransformer';
-  public $entity = 'Modules\Slider\Entities\Slide';
-  public $repository = 'Modules\Slider\Repositories\SlideApiRepository';
-
+  protected $table = 'slider__slides';
+  public $transformer = 'Modules\Slider\Transformers\SlideTransformer';
+  public $repository = 'Modules\Slider\Repositories\SlideRepository';
+  public $requestValidation = [
+      'create' => 'Modules\Slider\Http\Requests\CreateSlideRequest',
+      'update' => 'Modules\Slider\Http\Requests\UpdateSlideRequest',
+    ];
+  //Instance external/internal events to dispatch with extraData
+  public $dispatchesEventsWithBindings = [
+    //eg. ['path' => 'path/module/event', 'extraData' => [/*...optional*/]]
+    'created' => [],
+    'creating' => [],
+    'updated' => [],
+    'updating' => [],
+    'deleting' => [],
+    'deleted' => []
+  ];
+  public $with = ['files','translations'];
   public $translatedAttributes = [
     'title',
     'caption',
@@ -32,7 +40,6 @@ class Slide extends Model
     'summary',
     'code_ads'
   ];
-
   protected $fillable = [
     'slider_id',
     'page_id',
@@ -49,18 +56,17 @@ class Slide extends Model
     'responsive',
     'options'
   ];
-  protected $table = 'slider__slides';
-
+  
   /**
    * @var string
    */
   private $linkUrl;
-
+  
   /**
    * @var string
    */
   private $imageUrl;
-
+  
   public function slider()
   {
     return $this->belongsTo(Slider::class);

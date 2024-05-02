@@ -101,14 +101,14 @@ class Owl extends Component
   {
     $params = [
       'filter' => [
-        'field' => 'id',
+        'field' => 'system_name',
       ]
     ];
     
-    $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
+    $this->slider = app('Modules\\Slider\\Repositories\\SliderRepository')->getItem($this->id, json_decode(json_encode($params)));
     if (!$this->slider) {
-      $params['filter']['field'] = 'system_name';
-      $this->slider = app('Modules\\Slider\\Repositories\\SliderApiRepository')->getItem($this->id, json_decode(json_encode($params)));
+      $params['filter']['field'] = 'id';
+      $this->slider = app('Modules\\Slider\\Repositories\\SliderRepository')->getItem($this->id, json_decode(json_encode($params)));
       
     }
   
@@ -116,9 +116,10 @@ class Owl extends Component
       'filter' => [
         'sliderId' => $this->slider->id ?? null,
       ],
+      'include' => ['files','translations']
     ];
   
-    $this->slides = app('Modules\\Slider\\Repositories\\SlideApiRepository')->getItemsBy(json_decode(json_encode($params)));
+    $this->slides = app('Modules\\Slider\\Repositories\\SlideRepository')->getItemsBy(json_decode(json_encode($params)));
 
 
   }

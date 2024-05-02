@@ -1,8 +1,10 @@
-<?php namespace Modules\Slider\Http\Requests;
+<?php
 
-use Illuminate\Foundation\Http\FormRequest;
+namespace Modules\Slider\Http\Requests;
 
-class UpdateSliderRequest extends FormRequest
+use Modules\Core\Internationalisation\BaseFormRequest;
+
+class UpdateSliderRequest extends BaseFormRequest
 {
     public function rules()
     {
@@ -21,9 +23,13 @@ class UpdateSliderRequest extends FormRequest
 
     public function messages()
     {
-        return [
-            'name.required' => trans('slider::validation.name is required'),
-            'system_name.required' => trans('slider::validation.system name is required')
-        ];
+      return [
+        'name.required' => trans('slider::validation.name is required'),
+        'system_name.required' => trans('slider::validation.system name is required')
+      ];
+    }
+
+    public function getValidator(){
+        return $this->getValidatorInstance();
     }
 }
