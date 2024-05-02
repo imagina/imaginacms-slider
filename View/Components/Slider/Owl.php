@@ -114,6 +114,7 @@ class Owl extends Component
       'filter' => [
         'sliderId' => $this->slider->id ?? null,
       ],
+      'include' => ['files','translations']
     ];
   
     $this->slides = app('Modules\\Slider\\Repositories\\SlideRepository')->getItemsBy(json_decode(json_encode($params)));

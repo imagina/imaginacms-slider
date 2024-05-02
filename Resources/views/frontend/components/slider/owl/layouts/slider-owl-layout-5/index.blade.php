@@ -1,4 +1,4 @@
-@if(count($slider->slides)==1)
+@if(count($slides)==1)
   @php
     $mouseDrag=false;
     $touchDrag=false;
@@ -10,7 +10,7 @@
 <div id="{{ $slider->system_name }}Slider">
   <div id="{{ $slider->system_name }}"
        class="owl-carousel owl-theme owl-slider-layout-5 {{ $nav ? ' owl-with-nav carousel-nav-position-'.$navPosition : '' }} {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
-    @foreach($slider->slides as $index => $slide)
+    @foreach($slides as $index => $slide)
         @if($slide->responsive != 2)
           @if(isset($slide->code_ads) && !is_null($slide->code_ads))
             <div class="banner-{{$slide->id}} py-3">
