@@ -14,7 +14,7 @@ class AddTypeParameterInSliderTable extends Migration
   public function up()
   {
     Schema::table('slider__sliders', function (Blueprint $table) {
-      $table->text('type')->default('slider')->after('system_name');
+      $table->string('type')->default('slider')->after('system_name');
     });
   }
 
