@@ -26,7 +26,7 @@ class EloquentSliderRepository extends EloquentCrudRepository implements SliderR
    * show apply in the getItem
    * @var array
    */
-  protected $with = [all => ['slides']];
+  protected $with = ['all' => ['slides']];
 
   /**
    * Filter query
