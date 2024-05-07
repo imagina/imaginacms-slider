@@ -2,14 +2,8 @@
 
 namespace Modules\Slider\Repositories;
 
-use Modules\Core\Repositories\BaseRepository;
+use Modules\Core\Icrud\Repositories\BaseCrudRepository;
 
-interface SliderRepository extends BaseRepository
+interface SliderRepository extends BaseCrudRepository
 {
-    /**
-     * Get all online sliders
-     *
-     * @return object
-     */
-    public function allOnline();
 }

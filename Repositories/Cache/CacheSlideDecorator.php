@@ -2,20 +2,15 @@
 
 namespace Modules\Slider\Repositories\Cache;
 
-use Modules\Core\Repositories\Cache\BaseCacheDecorator;
 use Modules\Slider\Repositories\SlideRepository;
+use Modules\Core\Icrud\Repositories\Cache\BaseCacheCrudDecorator;
 
-class CacheSlideDecorator extends BaseCacheDecorator implements SlideRepository
+class CacheSlideDecorator extends BaseCacheCrudDecorator implements SlideRepository
 {
-    /**
-     * @var SlideRepository
-     */
-    protected $repository;
-
     public function __construct(SlideRepository $slide)
     {
         parent::__construct();
-        $this->entityName = 'slides';
+        $this->entityName = 'slider.slides';
         $this->repository = $slide;
     }
 }
