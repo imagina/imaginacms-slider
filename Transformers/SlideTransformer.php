@@ -15,6 +15,7 @@ class SlideTransformer extends CrudResource
   {
     return [
       'active' => $this->active ? 1 : 0,
+      'imageUrl' => $this->getImageUrl()
     ];
   }
 }
