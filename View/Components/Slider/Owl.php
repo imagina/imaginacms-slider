@@ -91,6 +91,7 @@ class Owl extends Component
     $this->navLateralLeftRight = $navLateralLeftRight;
     $this->navLateralTop = explode(",",$navLateralTop);
     $this->dotsBottom = $dotsBottom;
+    $this->isMobile = isMobileDevice();
   }
 
 

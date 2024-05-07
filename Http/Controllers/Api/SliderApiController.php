@@ -2,192 +2,58 @@
 
 namespace Modules\Slider\Http\Controllers\Api;
 
-use Illuminate\Contracts\Cache\Repository;
+use Modules\Core\Icrud\Controllers\BaseCrudController;
+//Model
+use Modules\Slider\Entities\Slider;
+use Modules\Slider\Repositories\SliderRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-use Modules\Ihelpers\Http\Controllers\Api\BaseApiController;
-use Modules\Slider\Http\Requests\UpdateSliderRequest;
-use Modules\Slider\Repositories\Eloquent\EloquentSliderApiRepository;
-use Modules\Slider\Repositories\SliderApiRepository;
-use Modules\Slider\Services\SlideOrderer;
-use Modules\Slider\Transformers\SliderApiTransformer;
+use Modules\Core\Icrud\Transformers\CrudResource;
 
-class SliderApiController extends BaseApiController
+class SliderApiController extends BaseCrudController
 {
-    /**
-     * @var Repository
-     */
-    private $cache;
+  public $model;
+  public $modelRepository;
 
-    /**
-     * @var SlideOrderer
-     */
-    private $slideOrderer;
-
-    /**
-     * @var EloquentSliderApiRepository
-     */
-    private $slider;
-
-    public function __construct(SliderApiRepository $slider, SlideOrderer $slideOrderer)
-    {
-        $this->slider = $slider;
-        $this->slideOrderer = $slideOrderer;
-    }
-
-      /**
-       * GET ITEMS
-       *
-       * @return mixed
-       */
-      public function index(Request $request)
-      {
-          try {
-              //Get Parameters from URL.
-              $params = $this->getParamsRequest($request);
-
-              //Request to Repository
-              $sliders = $this->slider->getItemsBy($params);
-
-              //Response
-              $response = [
-                  'data' => SliderApiTransformer::collection($sliders),
-              ];
-
-              //If request pagination add meta-page
-              $params->page ? $response['meta'] = ['page' => $this->pageTransformer($sliders)] : false;
-          } catch (\Exception $e) {
-              $status = $this->getStatusError($e->getCode());
-              $response = ['errors' => $e->getMessage()];
-          }
-
-          //Return response
-          return response()->json($response, $status ?? 200);
-      }
-
-    /**
-     * Show slide by id
-     */
-    public function show($criteria, Request $request)
-    {
-        try {
-            //Request to Repository
-
-            $params = $this->getParamsRequest($request);
-            $slider = $this->slider->getItem($criteria, $params);
-
-            //Response
-            $response = [
-                'data' => is_null($slider) ?
-                  false : new SliderApiTransformer($slider),
-            ];
-        } catch (\Exception $e) {
-            //Message Error
-            $status = 500;
-            $response = [
-                'errors' => $e->getMessage(),
-            ];
-        }
-
-        return response()->json($response, $status ?? 200);
-    }
+  public function __construct(Slider $model, SliderRepository $modelRepository)
+  {
+    $this->model = $model;
+    $this->modelRepository = $modelRepository;
+  }
 
   /**
-   * CREATE A ITEM
+   * Controller to create model
    *
    * @param Request $request
    * @return mixed
    */
   public function create(Request $request)
   {
-
     \DB::beginTransaction();
     try {
-      //Get data
-    $data = $request->input('attributes');
-    $name = strtolower(str_replace(" ", "_", $data['name']));
-    $data['system_name'] = uniqid($name."_type"."_".$data["type"] ?? ""."_");
-    //Validate Request
-    // $this->validateRequestApi(new CustomRequest((array)$data));
+      //Get model data
+      $modelData = $request->input('attributes') ?? [];
 
-                //Create item
-                $this->slider->create($data);
+      //Validate Request
+      if (isset($this->model->requestValidation['create'])) {
+        $this->validateRequestApi(new $this->model->requestValidation['create']($modelData));
+      }
 
-                //Response
-                $response = ['data' => ''];
-                \DB::commit(); //Commit to Data Base
-            } catch (\Exception $e) {
-                \DB::rollback(); //Rollback to Data Base
-                $status = $this->getStatusError($e->getCode());
-                $response = ['errors' => $e->getMessage()];
-            }
-            //Return response
-            return response()->json($response, $status ?? 200);
-        }
+      //instance the system_name from name
+      $name = strtolower(str_replace(" ", "_", $modelData['name']));
+      $modelData['system_name'] = uniqid($name."_type"."_".$modelData["type"] ?? ""."_");
 
-        /**
-         * UPDATE ITEM
-         *
-         * @return mixed
-         */
-        public function update($criteria, Request $request)
-        {
-            \DB::beginTransaction(); //DB Transaction
-            //   try {
-            //Get data
-            $data = $request->input('attributes');
+      //Create model
+      $model = $this->modelRepository->create($modelData);
 
-            //Validate Request
-            // $this->validateRequestApi(new UpdateSliderRequest((array)$data));
-
-            //Get Parameters from URL.
-            $params = $this->getParamsRequest($request);
-
-            //Request to Repository
-            $this->slider->updateBy($criteria, $data, $params);
-
-            if (isset($data['slides'])) {
-                $this->slideOrderer->handle(json_encode($data['slides']));
-            }
-
-            //Response
-            $response = ['data' => 'Item Updated'];
-            \DB::commit(); //Commit to DataBase
-            /* } catch (\Exception $e) {
-               \DB::rollback();//Rollback to Data Base
-               $status = $this->getStatusError($e->getCode());
-               $response = ["errors" => $e->getMessage()];
-             }*/
-
-            //Return response
-            return response()->json($response, $status ?? 200);
-        }
-
-            /**
-             * DELETE A ITEM
-             *
-             * @return mixed
-             */
-            public function delete($criteria, Request $request)
-            {
-                \DB::beginTransaction();
-                try {
-                    //Get params
-                    $params = $this->getParamsRequest($request);
-
-                    //call Method delete
-                    $this->slider->deleteBy($criteria, $params);
-
-                    //Response
-                    $response = ['data' => ''];
-                    \DB::commit(); //Commit to Data Base
-                } catch (\Exception $e) {
-                    \DB::rollback(); //Rollback to Data Base
-                    $status = $this->getStatusError($e->getCode());
-                    $response = ['errors' => $e->getMessage()];
-                }
-
-                //Return response
-                return response()->json($response, $status ?? 200);
-            }
+      //Response
+      $response = ["data" => CrudResource::transformData($model)];
+      \DB::commit(); //Commit to Data Base
+    } catch (\Exception $e) {
+      \DB::rollback();//Rollback to Data Base
+      $status = $this->getStatusError($e->getCode());
+      $response = ["messages" => [["message" => $e->getMessage(), "type" => "error"]]];
+    }
+    //Return response
+    return response()->json($response ?? ["data" => "Request successful"], $status ?? 200);
+  }
 }

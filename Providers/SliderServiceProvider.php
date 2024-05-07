@@ -33,24 +33,37 @@ class SliderServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBindings();
+        $this->app['events']->listen(BuildingSidebar::class, RegisterSliderSidebar::class);
+
+        $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
+            // append translations
+        });
+
+
     }
 
   /**
    * Register all online sliders on the Pingpong/Menu package
    */
-  public function boot()
-  {
-    $this->publishConfig('slider', 'config');
-    $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'permissions'), "asgard.slider.permissions");
+    public function boot()
+    {
+
+        $this->publishConfig('slider', 'config');
+        $this->publishConfig('slider', 'crud-fields');
+
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'settings'), "asgard.slider.settings");
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'settings-fields'), "asgard.slider.settings-fields");
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'permissions'), "asgard.slider.permissions");
     $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsPages'), "asgard.slider.cmsPages");
     $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'cmsSidebar'), "asgard.slider.cmsSidebar");
     $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'blocks'), "asgard.slider.blocks");
     $this->mergeConfigFrom($this->getModuleConfigFilePath('slider', 'gamification'), "asgard.slider.gamification");
 
-        $this->registerSliders();
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'slider');
+    $this->registerSliders();
+    $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'slider');
 
-        $this->registerComponents();
+    $this->registerComponents();
+
     }
 
     /**
@@ -78,64 +91,52 @@ class SliderServiceProvider extends ServiceProvider
                 return new CacheSliderDecorator($repository);
             }
         );
+      $this->app->bind(
+        'Modules\Slider\Repositories\SlideRepository',
+        function () {
+          $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSlideRepository(new \Modules\Slider\Entities\Slide());
 
-        $this->app->bind(
-            'Modules\Slider\Repositories\SlideRepository',
-            function () {
-                $repository = new EloquentSlideRepository(new Slide());
+          if (! config('app.cache')) {
+            return $repository;
+          }
 
-                if (! config('app.cache')) {
-                    return $repository;
-                }
+          return new \Modules\Slider\Repositories\Cache\CacheSlideDecorator($repository);
+        }
+      );
+      $this->app->bind(
+        'Modules\Slider\Repositories\SlideApiRepository',
+        function () {
+          $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSlideRepository(new \Modules\Slider\Entities\Slide());
 
-                return new CacheSlideDecorator($repository);
-            }
-        );
+          if (! config('app.cache')) {
+            return $repository;
+          }
 
-        $this->app->bind(
-            'Modules\Slider\Repositories\SlideApiRepository',
-            function () {
-                $repository = new EloquentSlideApiRepository(new Slide());
+          return new \Modules\Slider\Repositories\Cache\CacheSlideDecorator($repository);
+        }
+      );
+// add bindings
 
-                if (! config('app.cache')) {
-                    return $repository;
-                }
 
-                return new CacheSlideApiDecorator($repository);
-            }
-        );
-
-        $this->app->bind(
-            'Modules\Slider\Repositories\SliderApiRepository',
-            function () {
-                $repository = new EloquentSliderApiRepository(new Slider());
-
-                if (! config('app.cache')) {
-                    return $repository;
-                }
-
-                return new CacheSliderApiDecorator($repository);
-            }
-        );
-
-        $this->app->bind('Modules\Slider\Presenters\SliderPresenter');
+    $this->app->bind('Modules\Slider\Presenters\SliderPresenter');
     }
+
+  /**
+   * Register the active sliders
+   */
+  private function registerSliders()
+  {
+    if (!$this->app['asgard.isInstalled']) {
+      return;
+    }
+  }
 
     /**
-     * Register the active sliders
+     * Register Blade components
      */
-    private function registerSliders()
-    {
-        if (! $this->app['asgard.isInstalled']) {
-            return;
-        }
+
+    private function registerComponents(){
+        Blade::componentNamespace("Modules\Slider\View\Components", 'slider');
     }
 
-      /**
-       * Register Blade components
-       */
-      private function registerComponents()
-      {
-          Blade::componentNamespace("Modules\Slider\View\Components", 'slider');
-      }
 }

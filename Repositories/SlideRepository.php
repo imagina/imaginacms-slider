@@ -2,8 +2,8 @@
 
 namespace Modules\Slider\Repositories;
 
-use Modules\Core\Repositories\BaseRepository;
+use Modules\Core\Icrud\Repositories\BaseCrudRepository;
 
-interface SlideRepository extends BaseRepository
+interface SlideRepository extends BaseCrudRepository
 {
 }
