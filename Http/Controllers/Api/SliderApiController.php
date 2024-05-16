@@ -14,10 +14,13 @@ class SliderApiController extends BaseCrudController
   public $model;
   public $modelRepository;
 
+  private $slideOrderer;
+
   public function __construct(Slider $model, SliderRepository $modelRepository)
   {
     $this->model = $model;
     $this->modelRepository = $modelRepository;
+    $this->slideOrderer = app("Modules\Slider\Services\SlideOrderer");
   }
 
   /**
@@ -56,4 +59,27 @@ class SliderApiController extends BaseCrudController
     //Return response
     return response()->json($response ?? ["data" => "Request successful"], $status ?? 200);
   }
+
+  /*
+  * Update all slides
+  * @param Request $request
+  */
+  public function orderSlides(Request $request)
+  {
+    try {
+      
+      if ($request->input('attributes')){
+        $data = $request->input('attributes');
+        $this->slideOrderer->handle(json_encode($data['slider']));
+      } else {
+        $this->slideOrderer->handle($request->get('slider'));
+      }
+      $response = ["data" => "Order Updated"];
+    } catch (\Exception $e) {
+      $status = 500;
+      $response = ["errors" => $e->getMessage()];
+    }
+    return response()->json($response, $status ?? 200);
+  }
+
 }
