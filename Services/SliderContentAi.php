@@ -21,12 +21,12 @@ class SliderContentAi
     $this->aiService = new AiService();
     $this->maxAttempts = (int)setting("isite::n8nMaxAttempts", null, 3);
     $this->slideQuantity = $slideQuantity;
-    $this->sliderRepository = app("Modules\Slider\Repositories\SliderApiRepository");
-    $this->slideRepository = app("Modules\Slider\Repositories\SlideApiRepository");
+    $this->sliderRepository = app("Modules\Slider\Repositories\SliderRepository");
+    $this->slideRepository = app("Modules\Slider\Repositories\SlideRepository");
   }
 
   public function getSlides($quantity = 2)
-  { 
+  {
     \Log::info($this->log."getSlides|INIT");
 
     //instance the prompt to generate the posts
@@ -70,7 +70,7 @@ class SliderContentAi
       }else{
         \Log::info($this->log."startProcesses|Not Slider to update");
       }
-      
+
     }
 
   }
@@ -79,14 +79,14 @@ class SliderContentAi
   */
   public function getNewData()
   {
-    
+
     $newData = null;
 
     $attempts = 0;
     do {
       \Log::info($this->log."getNewData|Attempt:".($attempts+1)."/Max:".$this->maxAttempts);
       $newData = $this->getSlides($this->slideQuantity);
-  
+
       if(is_null($newData)){
         $attempts++;
       }else{
@@ -128,7 +128,7 @@ class SliderContentAi
           \Log::info($this->log."createSlides|Title: ".$slide['es']['title']);
 
       //\Log::info($this->log."createSlides|DataToSave: ".json_encode($slide));
-      
+
 
       $result = $this->slideRepository->create($slide);
 

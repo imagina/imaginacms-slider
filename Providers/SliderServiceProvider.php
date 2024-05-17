@@ -10,11 +10,9 @@ use Modules\Slider\Repositories\Cache\CacheSlideApiDecorator;
 use Modules\Slider\Repositories\Cache\CacheSliderApiDecorator;
 use Modules\Slider\Repositories\Cache\CacheSliderDecorator;
 use Modules\Slider\Repositories\Cache\CacheSlideDecorator;
-use Modules\Slider\Repositories\Eloquent\EloquentSlideApiRepository;
-use Modules\Slider\Repositories\Eloquent\EloquentSliderApiRepository;
 use Modules\Slider\Repositories\Eloquent\EloquentSlideRepository;
-use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Slider\Repositories\Eloquent\EloquentSliderRepository;
+use Modules\Core\Traits\CanPublishConfiguration;
 
 class SliderServiceProvider extends ServiceProvider
 {
@@ -48,7 +46,7 @@ class SliderServiceProvider extends ServiceProvider
    */
     public function boot()
     {
-       
+
         $this->publishConfig('slider', 'config');
         $this->publishConfig('slider', 'crud-fields');
 
@@ -98,19 +96,19 @@ class SliderServiceProvider extends ServiceProvider
         'Modules\Slider\Repositories\SlideRepository',
         function () {
           $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSlideRepository(new \Modules\Slider\Entities\Slide());
-      
+
           if (! config('app.cache')) {
             return $repository;
           }
-      
+
           return new \Modules\Slider\Repositories\Cache\CacheSlideDecorator($repository);
         }
       );
       $this->app->bind(
-        'Modules\Slider\Repositories\SlideApiRepository',
+        'Modules\Slider\Repositories\SlideRepository',
         function () {
           $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSlideRepository(new \Modules\Slider\Entities\Slide());
-      
+
           if (! config('app.cache')) {
             return $repository;
           }
