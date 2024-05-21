@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class Bootstrap extends Component
 {
+  
   public $id;
   public $layout;
   public $slider;

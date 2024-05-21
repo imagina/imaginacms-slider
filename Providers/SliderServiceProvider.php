@@ -11,8 +11,6 @@ use Modules\Slider\Repositories\Cache\CacheSlideApiDecorator;
 use Modules\Slider\Repositories\Cache\CacheSlideDecorator;
 use Modules\Slider\Repositories\Cache\CacheSliderApiDecorator;
 use Modules\Slider\Repositories\Cache\CacheSliderDecorator;
-use Modules\Slider\Repositories\Eloquent\EloquentSlideApiRepository;
-use Modules\Slider\Repositories\Eloquent\EloquentSliderApiRepository;
 use Modules\Slider\Repositories\Eloquent\EloquentSlideRepository;
 use Modules\Slider\Repositories\Eloquent\EloquentSliderRepository;
 
@@ -104,7 +102,7 @@ class SliderServiceProvider extends ServiceProvider
         }
       );
       $this->app->bind(
-        'Modules\Slider\Repositories\SlideApiRepository',
+        'Modules\Slider\Repositories\SlideRepository',
         function () {
           $repository = new \Modules\Slider\Repositories\Eloquent\EloquentSlideRepository(new \Modules\Slider\Entities\Slide());
 
