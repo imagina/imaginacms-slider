@@ -42,6 +42,7 @@ class Owl extends Component
   public $navLateralLeftRight;
   public $navLateralTop;
   public $dotsBottom;
+  public $isMobile;
 
   /**
    * Create a new component instance.
