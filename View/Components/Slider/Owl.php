@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\Slider\View\Components\Slider;
+
 use Illuminate\View\Component;
 
 class Owl extends Component
@@ -50,12 +51,12 @@ class Owl extends Component
    */
   public function __construct($id, $layout = 'slider-owl-layout-1', $height = '500px', $autoplay = true, $margin = 0,
                               $autoplayHoverPause = true, $loop = true, $dots = true, $dotsPosition = 'center',
-                              $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 10000, $imgObjectFit = "cover",
-                              $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
-                              $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
-                              $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
-                              $mouseDrag = true, $touchDrag = true, $navLateralTop = 50, $navLateralLeftRight = '15px',
-                              $dotsStyleColor = '#fff', $dotsBottom = 0
+                              $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 10000,
+                              $imgObjectFit = "cover", $responsiveClass = false, $responsive = null, $orderClasses = [],
+                              $withViewMoreButton = true, $container = "container", $stagePadding = 0, $view = null,
+                              $itemComponentAttributes = [], $itemComponentNamespace = null, $itemComponent = null,
+                              $navPosition = 'lateral', $mouseDrag = true, $touchDrag = true, $navLateralTop = 50,
+                              $navLateralLeftRight = '15px', $dotsStyleColor = '#fff', $dotsBottom = 0
   )
   {
     $this->id = $id;
@@ -83,13 +84,13 @@ class Owl extends Component
     $this->view = $view ?? "slider::frontend.components.slider.owl.layouts.{$this->layout}.index";
     $this->getItem();
     $this->itemComponent = $itemComponent ?? "isite::item-list";
-    $this->itemComponentNamespace =  $itemComponentNamespace ?? "Modules\Isite\View\Components\ItemList";
+    $this->itemComponentNamespace = $itemComponentNamespace ?? "Modules\Isite\View\Components\ItemList";
     $this->itemComponentAttributes = count($itemComponentAttributes) ? $itemComponentAttributes : config('asgard.slider.config.indexItemListAttributes');
     $this->navPosition = $navPosition ?? 'lateral';
     $this->mouseDrag = $mouseDrag;
     $this->touchDrag = $touchDrag;
     $this->navLateralLeftRight = $navLateralLeftRight;
-    $this->navLateralTop = explode(",",$navLateralTop);
+    $this->navLateralTop = explode(",", $navLateralTop);
     $this->dotsBottom = $dotsBottom;
     $this->isMobile = isMobileDevice();
   }
@@ -114,7 +115,7 @@ class Owl extends Component
       'filter' => [
         'sliderId' => $this->slider->id ?? null,
       ],
-      'include' => ['files','translations']
+      'include' => ['files', 'translations']
     ];
 
     $this->slides = app('Modules\\Slider\\Repositories\\SlideRepository')->getItemsBy(json_decode(json_encode($params)));
@@ -129,7 +130,7 @@ class Owl extends Component
    */
   public function render()
   {
-    if(!isset($this->slider->id))
+    if (!isset($this->slider->id))
       return view("slider::frontend.components.slider.owl.invalid-slider");
     return view($this->view);
   }
