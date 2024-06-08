@@ -1,16 +1,35 @@
-<?php namespace Modules\Slider\Entities;
+<?php
 
-use Dimsav\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Model;
+namespace Modules\Slider\Entities;
+
+use Astrotomic\Translatable\Translatable;
+use Modules\Core\Icrud\Entities\CrudModel;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 use Modules\Media\Support\Traits\MediaRelation;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\App;
 use Modules\Page\Entities\Page;
 
-class Slide extends Model
+class Slide extends CrudModel
 {
-  use Translatable, MediaRelation;
+  use Translatable, MediaRelation, BelongsToTenant;
 
+  protected $table = 'slider__slides';
+  public $transformer = 'Modules\Slider\Transformers\SlideTransformer';
+  public $repository = 'Modules\Slider\Repositories\SlideRepository';
+  public $requestValidation = [
+      'create' => 'Modules\Slider\Http\Requests\CreateSlideRequest',
+      'update' => 'Modules\Slider\Http\Requests\UpdateSlideRequest',
+    ];
+  //Instance external/internal events to dispatch with extraData
+  public $dispatchesEventsWithBindings = [
+    //eg. ['path' => 'path/module/event', 'extraData' => [/*...optional*/]]
+    'created' => [],
+    'creating' => [],
+    'updated' => [],
+    'updating' => [],
+    'deleting' => [],
+    'deleted' => []
+  ];
+  public $with = ['files','translations'];
   public $translatedAttributes = [
     'title',
     'caption',
@@ -18,8 +37,9 @@ class Slide extends Model
     'url',
     'active',
     'custom_html',
+    'summary',
+    'code_ads'
   ];
-
   protected $fillable = [
     'slider_id',
     'page_id',
@@ -33,9 +53,9 @@ class Slide extends Model
     'active',
     'external_image_url',
     'custom_html',
+    'responsive',
     'options'
   ];
-  protected $table = 'slider__slides';
 
   /**
    * @var string
@@ -79,7 +99,7 @@ class Slide extends Model
       if (!empty($this->external_image_url)) {
         $this->imageUrl = $this->external_image_url;
       } elseif (isset($this->files[0]) && !empty($this->files[0]->path)) {
-        $this->imageUrl = $this->filesByZone('slideimage')->first()->path_string;
+        $this->imageUrl = $this->filesByZone('slideimage')->first()->path;
       }
     }
 
@@ -104,6 +124,25 @@ class Slide extends Model
     }
 
     return $this->linkUrl;
+  }
+
+  /**
+   * returns slider link URL
+   * @return string|null
+   */
+  public function getUrlAttribute()
+  {
+    $url = "";
+      if (!empty($this->attributes["url"])) {
+        $url = $this->attributes["url"];
+      } elseif (!empty($this->uri)) {
+        $url = \LaravelLocalization::localizeUrl('/'. $this->uri);
+      } elseif (!empty($this->page)) {
+        $url = route('page', ['uri' => $this->page->slug]);
+      }
+
+
+    return $url;
   }
 
   protected function setOptionsAttribute($value)
