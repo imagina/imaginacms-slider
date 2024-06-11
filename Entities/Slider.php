@@ -1,22 +1,46 @@
-<?php namespace Modules\Slider\Entities;
+<?php
 
-use Illuminate\Database\Eloquent\Model;
+namespace Modules\Slider\Entities;
 
-class Slider extends Model
+use Astrotomic\Translatable\Translatable;
+use Modules\Core\Icrud\Entities\CrudModel;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+
+class Slider extends CrudModel
 {
+
+  use BelongsToTenant;
+
+  protected $table = 'slider__sliders';
+  public $transformer = 'Modules\Slider\Transformers\SliderTransformer';
+  public $repository = 'Modules\Slider\Repositories\SliderRepository';
+  public $requestValidation = [
+      'create' => 'Modules\Slider\Http\Requests\CreateSliderRequest',
+      'update' => 'Modules\Slider\Http\Requests\UpdateSliderRequest',
+    ];
+  //Instance external/internal events to dispatch with extraData
+  public $dispatchesEventsWithBindings = [
+    //eg. ['path' => 'path/module/event', 'extraData' => [/*...optional*/]]
+    'created' => [],
+    'creating' => [],
+    'updated' => [],
+    'updating' => [],
+    'deleting' => [],
+    'deleted' => []
+  ];
+  public $translatedAttributes = [];
   protected $fillable = [
     'name',
     'system_name',
     'options',
-    'active'
+    'active',
+    'type'
   ];
   protected $fakeColumns = ['options'];
 
-  protected $table = 'slider__sliders';
-
   public function slides()
   {
-    return $this->hasMany(Slide::class)->orderBy('position', 'asc');
+    return $this->hasMany(Slide::class)->with('translations')->orderBy('position', 'asc');
   }
 
   protected function setOptionsAttribute($value)

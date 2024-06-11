@@ -1,34 +1,17 @@
-<?php namespace Modules\Slider\Repositories\Cache;
+<?php
 
-use Modules\Core\Repositories\Cache\BaseCacheDecorator;
+namespace Modules\Slider\Repositories\Cache;
+
 use Modules\Slider\Repositories\SliderRepository;
+use Modules\Core\Icrud\Repositories\Cache\BaseCacheCrudDecorator;
 
-class CacheSliderDecorator extends BaseCacheDecorator implements SliderRepository
+class CacheSliderDecorator extends BaseCacheCrudDecorator implements SliderRepository
 {
-    /**
-     * @var SliderRepository
-     */
-    protected $repository;
-
     public function __construct(SliderRepository $slider)
     {
         parent::__construct();
-        $this->entityName = 'sliders';
+        $this->entityName = 'slider.sliders';
         $this->repository = $slider;
     }
 
-    /**
-     * Get all online sliders
-     * @return object
-     */
-    public function allOnline()
-    {
-        return $this->cache
-            ->tags($this->entityName, 'global')
-            ->remember("{$this->locale}.{$this->entityName}.allOnline", $this->cacheTime,
-                function () {
-                    return $this->repository->allOnline();
-                }
-            );
-    }
 }

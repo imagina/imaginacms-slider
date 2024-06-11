@@ -1,8 +1,9 @@
-<?php namespace Modules\Slider\Repositories;
+<?php
 
-use Modules\Core\Repositories\BaseRepository;
+namespace Modules\Slider\Repositories;
 
-interface SlideRepository extends BaseRepository
+use Modules\Core\Icrud\Repositories\BaseCrudRepository;
+
+interface SlideRepository extends BaseCrudRepository
 {
-
 }
