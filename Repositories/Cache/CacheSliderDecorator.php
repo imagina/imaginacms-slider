@@ -14,4 +14,17 @@ class CacheSliderDecorator extends BaseCacheCrudDecorator implements SliderRepos
         $this->repository = $slider;
     }
 
+    public function findBySystemName($systemName)
+    {
+        return $this->remember(function ($systemName) {
+            return $this->repository->findBySystemName($systemName);
+        });
+    }
+
+    public function countAll()
+    {
+        return $this->remember(function () {
+            return $this->repository->countAll();
+        });
+    }
 }
