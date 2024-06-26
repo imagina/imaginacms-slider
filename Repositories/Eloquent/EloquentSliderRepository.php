@@ -75,4 +75,13 @@ class EloquentSliderRepository extends EloquentCrudRepository implements SliderR
     //Response
     return $model;
   }
+
+    /**
+     * Count all records
+     * @return int
+     */
+    public function countAll()
+    {
+        return $this->model->count();
+    }
 }
