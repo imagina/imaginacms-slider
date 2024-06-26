@@ -84,13 +84,4 @@ class EloquentSliderRepository extends EloquentCrudRepository implements SliderR
     {
         return $this->model->count();
     }
-
-    /**
-     * @param string $systemName
-     * @return Slider
-     */
-    public function findBySystemName($systemName)
-    {
-        return $this->model->where('system_name', '=', $systemName)->with(["slides", "slides.files"])->first();
-    }
 }
