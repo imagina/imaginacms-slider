@@ -37,8 +37,9 @@ class SliderPresenter extends AbstractSliderPresenter implements SliderPresenter
         return $view->render();
     }
 
-    private function getSliderFromRepository($systemName): Slider
+    private function getSliderFromRepository($systemName)
     {
-        return $this->sliderRepository->findBySystemName($systemName);
+        $params = ['filter' => ['field' => 'system_name']];
+        return $this->sliderRepository->getItem($systemName, $params);
     }
 }
