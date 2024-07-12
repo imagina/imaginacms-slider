@@ -10,6 +10,8 @@ use Modules\Slider\Repositories\Cache\CacheSlideApiDecorator;
 use Modules\Slider\Repositories\Cache\CacheSliderApiDecorator;
 use Modules\Slider\Repositories\Cache\CacheSliderDecorator;
 use Modules\Slider\Repositories\Cache\CacheSlideDecorator;
+use Modules\Slider\Repositories\Eloquent\EloquentSlideApiRepository;
+use Modules\Slider\Repositories\Eloquent\EloquentSliderApiRepository;
 use Modules\Slider\Repositories\Eloquent\EloquentSlideRepository;
 use Modules\Slider\Repositories\Eloquent\EloquentSliderRepository;
 use Modules\Core\Traits\CanPublishConfiguration;
@@ -116,6 +118,32 @@ class SliderServiceProvider extends ServiceProvider
           return new \Modules\Slider\Repositories\Cache\CacheSlideDecorator($repository);
         }
       );
+
+        $this->app->bind(
+            'Modules\Slider\Repositories\SlideApiRepository',
+            function () {
+                $repository = new EloquentSlideApiRepository(new Slide());
+
+                if (!config('app.cache')) {
+                    return $repository;
+                }
+
+                return new CacheSlideApiDecorator($repository);
+            }
+        );
+
+        $this->app->bind(
+            'Modules\Slider\Repositories\SliderApiRepository',
+            function () {
+                $repository = new EloquentSliderApiRepository(new Slider());
+
+                if (!config('app.cache')) {
+                    return $repository;
+                }
+
+                return new CacheSliderApiDecorator($repository);
+            }
+        );
 // add bindings
 
 
