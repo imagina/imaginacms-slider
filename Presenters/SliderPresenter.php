@@ -43,7 +43,7 @@ class SliderPresenter extends AbstractSliderPresenter implements SliderPresenter
      */
     private function getSliderFromRepository($systemName)
     {
-        $params = ['filter' => ['field' => 'system_name']];
+        $params = json_decode(json_encode(['filter' => ['field' => 'system_name']]));
         return $this->sliderRepository->getItem($systemName, $params);
     }
 }
