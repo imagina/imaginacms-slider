@@ -8,11 +8,8 @@ class UpdateSliderRequest extends BaseFormRequest
 {
     public function rules()
     {
-        $slider = $this->route()->parameter('slider');
-
         return [
             'name' => 'required',
-            'primary' => "unique:slider__sliders,primary,{$slider->id}",
         ];
     }
 
