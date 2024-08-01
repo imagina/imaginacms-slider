@@ -33,7 +33,7 @@
             </div>
           @endif
         @endif
-      @endif
+      @else
       @if(isset($slide->responsive) && $slide->responsive != 3)
         @if(isset($slide->code_ads) && !is_null($slide->code_ads))
           <div class="banner-{{$slide->id}} py-3">
@@ -54,6 +54,7 @@
             @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
           </div>
         @endif
+      @endif
       @endif
     @endforeach
   </div>
