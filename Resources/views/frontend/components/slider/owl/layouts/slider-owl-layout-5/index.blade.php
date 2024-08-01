@@ -33,28 +33,29 @@
             </div>
           @endif
         @endif
-      @endif
-      @if(isset($slide->responsive) && $slide->responsive != 3)
-        @if(isset($slide->code_ads) && !is_null($slide->code_ads))
-          <div class="banner-{{$slide->id}} py-3">
-            {!! $slide->code_ads !!}
-          </div>
-        @else
-          <div class="slide">
-            @php $itemComponentAttributes += ['itemComponentTarget' => $slide->target] @endphp
-            @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
-              @php
-                $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
-              @endphp
+      @else
+        @if(isset($slide->responsive) && $slide->responsive != 3)
+            @if(isset($slide->code_ads) && !is_null($slide->code_ads))
+              <div class="banner-{{$slide->id}} py-3">
+                {!! $slide->code_ads !!}
+              </div>
             @else
-              @php
-                $itemComponentAttributes += ['viewMoreButtonLabel' => $slide->caption ?? trans('isite::common.menu.viewMore') ];
-              @endphp
+              <div class="slide">
+                @php $itemComponentAttributes += ['itemComponentTarget' => $slide->target] @endphp
+                @if(!empty($itemComponentAttributes['viewMoreButtonLabel']))
+                  @php
+                    $itemComponentAttributes['viewMoreButtonLabel'] = $slide->caption ?? trans('isite::common.menu.viewMore');
+                  @endphp
+                @else
+                  @php
+                    $itemComponentAttributes += ['viewMoreButtonLabel' => $slide->caption ?? trans('isite::common.menu.viewMore') ];
+                  @endphp
+                @endif
+                @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
+              </div>
             @endif
-            @include("isite::frontend.partials.item",["item" => $slide, "itemLayout" => $itemComponentAttributes['layout'],"itemComponentAttributes" => $itemComponentAttributes])
-          </div>
         @endif
-      @endif
+      @endif  
     @endforeach
   </div>
 </div>
