@@ -34,7 +34,8 @@ class Slider extends CrudModel
     'system_name',
     'options',
     'active',
-    'type'
+    'type',
+    'organization_id'
   ];
   protected $fakeColumns = ['options'];
 
