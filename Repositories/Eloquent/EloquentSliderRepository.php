@@ -47,6 +47,7 @@ class EloquentSliderRepository extends EloquentCrudRepository implements SliderR
      *
      */
 
+
     //Response
     return $query;
   }
