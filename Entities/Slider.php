@@ -10,7 +10,7 @@ class Slider extends CrudModel
 {
 
   use BelongsToTenant;
-  
+
   protected $table = 'slider__sliders';
   public $transformer = 'Modules\Slider\Transformers\SliderTransformer';
   public $repository = 'Modules\Slider\Repositories\SliderRepository';
@@ -34,7 +34,8 @@ class Slider extends CrudModel
     'system_name',
     'options',
     'active',
-    'type'
+    'type',
+    'organization_id'
   ];
   protected $fakeColumns = ['options'];
 

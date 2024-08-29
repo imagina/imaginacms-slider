@@ -44,6 +44,7 @@ class Owl extends Component
   public $navLateralTop;
   public $dotsBottom;
   public $isMobile;
+  public $central;
 
   /**
    * Create a new component instance.
@@ -57,10 +58,11 @@ class Owl extends Component
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
                               $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
                               $mouseDrag = true, $touchDrag = true, $navLateralTop = 50, $navLateralLeftRight = '15px',
-                              $dotsStyleColor = '#fff', $dotsBottom = 0
+                              $dotsStyleColor = '#fff', $dotsBottom = 0, $central = false
   )
   {
     $this->id = $id;
+    $this->central = $central;
     $this->layout = $layout ?? 'slider-owl-layout-1';
     $this->height = $height ?? '500px';
     $this->margin = $margin ?? 0;
@@ -96,7 +98,7 @@ class Owl extends Component
     $this->isMobile = isMobileDevice();
   }
 
-  
+
   public function getItem()
   {
     $params = [
@@ -104,26 +106,31 @@ class Owl extends Component
         'field' => 'system_name',
       ]
     ];
-    
+
+    if($this->central) $params['filter']['withoutTenancy'] = true;
+
     $this->slider = app('Modules\\Slider\\Repositories\\SliderRepository')->getItem($this->id, json_decode(json_encode($params)));
+
     if (!$this->slider) {
       $params['filter']['field'] = 'id';
       $this->slider = app('Modules\\Slider\\Repositories\\SliderRepository')->getItem($this->id, json_decode(json_encode($params)));
-      
+
     }
-  
+
     $params = [
       'filter' => [
         'sliderId' => $this->slider->id ?? null,
       ],
       'include' => ['files','translations']
     ];
-  
+
+    if($this->central) $params['filter']['withoutTenancy'] = true;
+
     $this->slides = app('Modules\\Slider\\Repositories\\SlideRepository')->getItemsBy(json_decode(json_encode($params)));
 
 
   }
-  
+
   /**
    * Get the view / contents that represent the component.
    *
