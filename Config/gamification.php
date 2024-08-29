@@ -10,7 +10,7 @@ return [
       'title' => "$transPrefix.activities.createSlider",
       'description' => "$transPrefix.activities.createSliderDescription",
       'type' => 1,
-      'url' => "iadmin/#/slider/index?create=call",
+      'url' => "iadmin/#/slider/index",
       'permission' => 'slider.sliders.manage',
       'categoryId' => 'admin_home_actions',
       'icon' => 'fa-light fa-rectangle-vertical-history',
