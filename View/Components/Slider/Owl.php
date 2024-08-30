@@ -103,18 +103,13 @@ class Owl extends Component
   {
     $params = [
       'filter' => [
-        'field' => 'system_name',
+        'field' => ['system_name', 'id'],
       ]
     ];
 
     if($this->central) $params['filter']['withoutTenancy'] = true;
 
     $this->slider = app('Modules\\Slider\\Repositories\\SliderRepository')->getItem($this->id, json_decode(json_encode($params)));
-    if (!$this->slider) {
-      $params['filter']['field'] = 'id';
-      $this->slider = app('Modules\\Slider\\Repositories\\SliderRepository')->getItem($this->id, json_decode(json_encode($params)));
-
-    }
 
     $params = [
       'filter' => [
