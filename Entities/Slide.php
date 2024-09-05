@@ -154,4 +154,15 @@ class Slide extends CrudModel
   {
     return json_decode($value);
   }
+
+    public function getCacheClearableData()
+    {
+        return [
+            'urls' => [
+                config("app.url"),
+                $this->url
+            ]
+        ];
+    }
+
 }
