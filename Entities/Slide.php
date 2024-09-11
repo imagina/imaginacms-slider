@@ -98,9 +98,9 @@ class Slide extends CrudModel
     if ($this->imageUrl === null) {
       if (!empty($this->external_image_url)) {
         $this->imageUrl = $this->external_image_url;
-      } elseif (isset($this->files[0]) && !empty($this->files[0]->path)) {
-        $this->imageUrl = $this->filesByZone('slideimage')->first()->path;
       }
+      $slideImage = $this->filesByZone('slideimage')->first();
+      if ($slideImage) $this->imageUrl = $slideImage->path;
     }
 
     return $this->imageUrl;
@@ -153,5 +153,15 @@ class Slide extends CrudModel
   public function getOptionsAttribute($value)
   {
     return json_decode($value);
+  }
+
+  public function getCacheClearableData()
+  {
+     return [
+       'urls' => [
+          config("app.url"),
+          url($this->url)
+       ]
+     ];
   }
 }
