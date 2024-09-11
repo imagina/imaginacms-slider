@@ -16,9 +16,9 @@ class Slide extends CrudModel
   public $transformer = 'Modules\Slider\Transformers\SlideTransformer';
   public $repository = 'Modules\Slider\Repositories\SlideRepository';
   public $requestValidation = [
-      'create' => 'Modules\Slider\Http\Requests\CreateSlideRequest',
-      'update' => 'Modules\Slider\Http\Requests\UpdateSlideRequest',
-    ];
+    'create' => 'Modules\Slider\Http\Requests\CreateSlideRequest',
+    'update' => 'Modules\Slider\Http\Requests\UpdateSlideRequest',
+  ];
   //Instance external/internal events to dispatch with extraData
   public $dispatchesEventsWithBindings = [
     //eg. ['path' => 'path/module/event', 'extraData' => [/*...optional*/]]
@@ -29,7 +29,7 @@ class Slide extends CrudModel
     'deleting' => [],
     'deleted' => []
   ];
-  public $with = ['files','translations'];
+  public $with = ['files', 'translations'];
   public $translatedAttributes = [
     'title',
     'caption',
@@ -56,17 +56,17 @@ class Slide extends CrudModel
     'responsive',
     'options'
   ];
-  
+
   /**
    * @var string
    */
   private $linkUrl;
-  
+
   /**
    * @var string
    */
   private $imageUrl;
-  
+
   public function slider()
   {
     return $this->belongsTo(Slider::class);
@@ -98,15 +98,16 @@ class Slide extends CrudModel
     if ($this->imageUrl === null) {
       if (!empty($this->external_image_url)) {
         $this->imageUrl = $this->external_image_url;
-      } elseif (isset($this->files[0]) && !empty($this->files[0]->path)) {
-        $this->imageUrl = $this->filesByZone('slideimage')->first()->path;
       }
+
+      $slideImage = $this->filesByZone('slideimage')->first();
+      if ($slideImage) $this->imageUrl = $slideImage->path;
     }
 
     return $this->imageUrl;
   }
-  
-  
+
+
   /**
    * returns slider link URL
    * @return string|null
@@ -122,10 +123,10 @@ class Slide extends CrudModel
         $this->linkUrl = route('page', ['uri' => $this->page->slug]);
       }
     }
-    
+
     return $this->linkUrl;
   }
-  
+
   /**
    * returns slider link URL
    * @return string|null
@@ -133,15 +134,15 @@ class Slide extends CrudModel
   public function getUrlAttribute()
   {
     $url = "";
-      if (!empty($this->attributes["url"])) {
-        $url = $this->attributes["url"];
-      } elseif (!empty($this->uri)) {
-        $url = \LaravelLocalization::localizeUrl('/'. $this->uri);
-      } elseif (!empty($this->page)) {
-        $url = route('page', ['uri' => $this->page->slug]);
-      }
-    
-    
+    if (!empty($this->attributes["url"])) {
+      $url = $this->attributes["url"];
+    } elseif (!empty($this->uri)) {
+      $url = \LaravelLocalization::localizeUrl('/' . $this->uri);
+    } elseif (!empty($this->page)) {
+      $url = route('page', ['uri' => $this->page->slug]);
+    }
+
+
     return $url;
   }
 
@@ -155,14 +156,14 @@ class Slide extends CrudModel
     return json_decode($value);
   }
 
-    public function getCacheClearableData()
-    {
-        return [
-            'urls' => [
-                config("app.url"),
-                $this->url
-            ]
-        ];
-    }
+  public function getCacheClearableData()
+  {
+    return [
+      'urls' => [
+        config("app.url"),
+        $this->url
+      ]
+    ];
+  }
 
 }
