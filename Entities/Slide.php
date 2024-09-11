@@ -161,7 +161,7 @@ class Slide extends CrudModel
     return [
       'urls' => [
         config("app.url"),
-        $this->url
+        url($this->url)
       ]
     ];
   }
