@@ -12,5 +12,6 @@ class CacheSlideDecorator extends BaseCacheCrudDecorator implements SlideReposit
         parent::__construct();
         $this->entityName = 'slider.slides';
         $this->repository = $slide;
+        $this->tags = 'slider.sliders';
     }
 }
