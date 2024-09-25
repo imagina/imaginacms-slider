@@ -6,30 +6,28 @@ use Modules\Core\Internationalisation\BaseFormRequest;
 
 class UpdateSliderRequest extends BaseFormRequest
 {
-    public function rules()
-    {
-        $slider = $this->route()->parameter('slider');
+  public function rules()
+  {
+    return [
+      'name' => 'required'
+    ];
+  }
 
-        return [
-            'name' => 'required',
-            'primary' => "unique:slider__sliders,primary,{$slider->id}",
-        ];
-    }
+  public function authorize()
+  {
+    return true;
+  }
 
-    public function authorize()
-    {
-        return true;
-    }
+  public function messages()
+  {
+    return [
+      'name.required' => trans('slider::validation.name is required'),
+      'system_name.required' => trans('slider::validation.system name is required')
+    ];
+  }
 
-    public function messages()
-    {
-      return [
-        'name.required' => trans('slider::validation.name is required'),
-        'system_name.required' => trans('slider::validation.system name is required')
-      ];
-    }
-
-    public function getValidator(){
-        return $this->getValidatorInstance();
-    }
+  public function getValidator()
+  {
+    return $this->getValidatorInstance();
+  }
 }
