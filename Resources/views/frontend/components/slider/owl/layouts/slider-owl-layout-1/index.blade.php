@@ -7,7 +7,7 @@
           @switch($slide->type)
             @case("video")
             <div class="item h-100">
-                <livewire:isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                                            :tooltip="$tooltipEditLink"/>
               @if($slide->mediaFiles()->slideimage->isVideo)
                 <video class="d-block h-100 slider-img__{{$imgObjectFit}}" width="100%" loop autoplay muted>
@@ -21,7 +21,7 @@
             @break
             @default
             <div class="item h-100">
-                <livewire:isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                                            :tooltip="$tooltipEditLink"/>
               @if(isset($slide->code_ads) && !is_null($slide->code_ads))
                 <div class="banner-{{$slide->id}} py-3">
@@ -83,7 +83,7 @@
         @switch($slide->type)
           @case("video")
           <div class="item h-100">
-              <livewire:isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+              <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                                          :tooltip="$tooltipEditLink"/>
             @if($slide->mediaFiles()->slideimage->isVideo)
               <video class="d-block h-100 slider-img__{{$imgObjectFit}}" width="100%" loop autoplay muted>
@@ -97,7 +97,7 @@
           @break
           @default
           <div class="item h-100">
-              <livewire:isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+              <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                                          :tooltip="$tooltipEditLink"/>
             @if(isset($slide->code_ads) && !is_null($slide->code_ads))
               <div class="banner-{{$slide->id}} py-3">

@@ -6,7 +6,7 @@
         @if(isset($slide->responsive) && $slide->responsive != 2)
           <div class="card card-item border-0">
             <div class="row align-items-center">
-                <livewire:isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+                <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                                            :tooltip="$tooltipEditLink"/>
               <div class="col-12 bg-image {{$orderClasses["photo"] ?? 'order-0'}} item-image">
                 @if(isset($slide->code_ads) && !is_null($slide->code_ads))
@@ -51,7 +51,7 @@
       @if(isset($slide->responsive) && $slide->responsive != 3)
         <div class="card card-item border-0">
           <div class="row align-items-center">
-              <livewire:isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
+              <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
                                          :tooltip="$tooltipEditLink"/>
             <div class="col-12 bg-image {{$orderClasses["photo"] ?? 'order-0'}} item-image">
               @if(isset($slide->code_ads) && !is_null($slide->code_ads))
