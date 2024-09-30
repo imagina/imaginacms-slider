@@ -9,7 +9,7 @@ class UpdateSliderRequest extends BaseFormRequest
   public function rules()
   {
     return [
-      'name' => 'required',
+      'name' => 'required'
     ];
   }
 
@@ -26,7 +26,8 @@ class UpdateSliderRequest extends BaseFormRequest
     ];
   }
 
-  public function getValidator(){
+  public function getValidator()
+  {
     return $this->getValidatorInstance();
   }
 }
