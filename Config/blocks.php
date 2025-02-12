@@ -50,6 +50,18 @@ return [
                             "type" => "number"
                         ]
                     ],
+                  "animate" => [
+                        "name" => "animate",
+                        "value" => "",
+                        "type" => "input",
+                        "props" => [
+                            "label" => "Animación slider",
+                            "type" => "text",
+                            "help" => [
+                              "description" => "ingresa la animación separada por coma (,) ANIMACIONES: https://animate.style",
+                            ],
+                        ],
+                    ],
                     "autoplayHoverPause" => [
                         "name" => "autoplayHoverPause",
                         "value" => "1",
