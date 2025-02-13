@@ -57,7 +57,7 @@ class Owl extends Component
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
                               $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
                               $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
-                              $mouseDrag = true, $touchDrag = true, $animate = ["animate__slideInLeft", "animate__slideOutRight"], $navLateralTop = 50, $navLateralLeftRight = '15px',
+                              $mouseDrag = true, $touchDrag = true, $animate = "animate__slideInLeft,animate__slideOutRight", $navLateralTop = 50, $navLateralLeftRight = '15px',
                               $dotsStyleColor = '#fff', $dotsBottom = 0, $central = false
   )
   {
