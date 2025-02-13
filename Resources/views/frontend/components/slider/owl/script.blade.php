@@ -24,13 +24,15 @@
         autoplayTimeout: {{$autoplayTimeout}},
         mouseDrag: {!! $mouseDrag ? 'true' : 'false' !!},
         touchDrag: {!! $touchDrag ? 'true' : 'false' !!},
+        animateOut: "{{ $animate[ 1 ] }}",
+        animateIn: "{{ $animate[ 0 ] }}",
         {!! !empty($navText) ? 'navText: '.$navText."," : "" !!}
       });
-      vmslider.find('.owl-dot').each(function (index) {
+      vmslider.find('.owl-dot').each(function(index) {
         $(this).attr('aria-label', index + 1);
       });
-      vmslider.find('.owl-next').attr('aria-label', '{{trans('slider::frontend.next')}}');
-      vmslider.find('.owl-prev').attr('aria-label', '{{trans('slider::frontend.previous')}}');
+      vmslider.find('.owl-next').attr('aria-label','{{trans('slider::frontend.next')}}');
+      vmslider.find('.owl-prev').attr('aria-label','{{trans('slider::frontend.previous')}}');
     });
   </script>
 @stop
