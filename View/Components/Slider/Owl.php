@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\Slider\View\Components\Slider;
+
 use Illuminate\View\Component;
 
 class Owl extends Component
@@ -55,9 +56,9 @@ class Owl extends Component
                               $autoplayHoverPause = true, $loop = true, $dots = true, $dotsPosition = 'center',
                               $dotsStyle = 'line', $nav = true, $navText = "", $autoplayTimeout = 10000, $imgObjectFit = "cover",
                               $responsiveClass = false, $responsive = null, $orderClasses = [], $withViewMoreButton = true,
-                              $container="container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
+                              $container = "container", $stagePadding = 0, $view = null, $itemComponentAttributes = [],
                               $itemComponentNamespace = null, $itemComponent = null, $navPosition = 'lateral',
-                              $mouseDrag = true, $touchDrag = true, $animate = "animate__slideInLeft,animate__slideOutRight", $navLateralTop = 50, $navLateralLeftRight = '15px',
+                              $mouseDrag = true, $touchDrag = true, $animate = null, $navLateralTop = 50, $navLateralLeftRight = '15px',
                               $dotsStyleColor = '#fff', $dotsBottom = 0, $central = false
   )
   {
@@ -92,9 +93,12 @@ class Owl extends Component
     $this->navPosition = $navPosition ?? 'lateral';
     $this->mouseDrag = $mouseDrag;
     $this->touchDrag = $touchDrag;
+    if (empty($animate) || is_string($animate) && strlen(trim($animate)) == 0) {
+      $animate = "animate__slideInLeft,animate__slideOutRight";
+    }
     $this->animate = explode(",", $animate);
     $this->navLateralLeftRight = $navLateralLeftRight;
-    $this->navLateralTop = explode(",",$navLateralTop);
+    $this->navLateralTop = explode(",", $navLateralTop);
     $this->dotsBottom = $dotsBottom;
     $this->isMobile = isMobileDevice();
   }
@@ -108,7 +112,7 @@ class Owl extends Component
       ]
     ];
 
-    if($this->central) $params['filter']['withoutTenancy'] = true;
+    if ($this->central) $params['filter']['withoutTenancy'] = true;
 
     $this->slider = app('Modules\\Slider\\Repositories\\SliderRepository')->getItem($this->id, json_decode(json_encode($params)));
 
@@ -116,10 +120,10 @@ class Owl extends Component
       'filter' => [
         'sliderId' => $this->slider->id ?? null,
       ],
-      'include' => ['files','translations']
+      'include' => ['files', 'translations']
     ];
 
-    if($this->central) $params['filter']['withoutTenancy'] = true;
+    if ($this->central) $params['filter']['withoutTenancy'] = true;
 
     $this->slides = app('Modules\\Slider\\Repositories\\SlideRepository')->getItemsBy(json_decode(json_encode($params)));
 
@@ -133,7 +137,7 @@ class Owl extends Component
    */
   public function render()
   {
-    if(!isset($this->slider->id))
+    if (!isset($this->slider->id))
       return view("slider::frontend.components.slider.owl.invalid-slider");
     return view($this->view);
   }
