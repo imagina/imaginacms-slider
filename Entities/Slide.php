@@ -158,9 +158,6 @@ class Slide extends CrudModel
   public function getCacheClearableData()
   {
     $baseUrls = [config("app.url")];
-    if (!$this->wasRecentlyCreated) {
-      $baseUrls[] = $this->url;
-    }
     $urls = ['urls' => $baseUrls];
     return $urls;
   }
