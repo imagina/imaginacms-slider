@@ -1,4 +1,23 @@
-<div id="{{ $slider->system_name }}"
+@php
+  $dataSliderOpt = [
+    'stage-padding' => $stagePadding,
+    'dots' => $dots,
+    'loop' => $loopOwl,
+    'margin' => $margin,
+    'nav' => $nav,
+    'autoplay' => $autoplay,
+    'autoplay-hover-pause' => $autoplayHoverPause,
+    'responsive-class' => $responsiveClass,
+    'responsive' => $responsive,
+    'autoplay-timeout' => $autoplayTimeout,
+    'mouse-drag' => $mouseDrag,
+    'touch-drag' => $touchDrag,
+    'nav-text' => $navText
+  ];
+  $dataSliderOptJson = json_encode($dataSliderOpt)
+@endphp
+
+<div id="{{ $slider->system_name }}" data-slider-id="{{$id}}" data-slider-options="{{$dataSliderOptJson}}"
      class="owl-carousel owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
     @foreach($slides as $index => $slide)
         @if($slide->active)
