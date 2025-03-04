@@ -1,9 +1,9 @@
-@section('scripts-owl')
-  @once
+@once
+  @section('scripts-owl')
     @parent
     <script>
       function parseOptions(options, key, defaultValue = null) {
-        if(!options[key] || (typeof options[key] != 'string')) return defaultValue
+        if (!options[key] || (typeof options[key] != 'string')) return defaultValue
         try {
           return JSON.parse(options[key])
         } catch (error) {
@@ -60,5 +60,5 @@
         });
       }
     </script>
-  @endonce
-@stop
+  @stop
+@endonce
