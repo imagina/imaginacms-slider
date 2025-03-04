@@ -55,7 +55,9 @@
 
       // Function to reinitialize sliders dynamically (e.g., after infinite scroll loads new content)
       function reinitializeNewSliders() {
-        $('[data-slider-id]').not('.owl-loaded').each(function () {
+        $('[data-slider-id]').filter(function () {
+          return !this.classList.contains('owl-loaded'); // Evita el uso de jQuery internamente
+        }).each(function () {
           initializeSlider($(this));
         });
       }
