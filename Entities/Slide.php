@@ -4,6 +4,7 @@ namespace Modules\Slider\Entities;
 
 use Astrotomic\Translatable\Translatable;
 use Modules\Core\Icrud\Entities\CrudModel;
+use Modules\Isite\Entities\Organization;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 use Modules\Media\Support\Traits\MediaRelation;
 use Modules\Page\Entities\Page;
@@ -54,7 +55,8 @@ class Slide extends CrudModel
     'external_image_url',
     'custom_html',
     'responsive',
-    'options'
+    'options',
+    'organization_id'
   ];
 
   /**
@@ -156,10 +158,19 @@ class Slide extends CrudModel
     return json_decode($value);
   }
 
+  public function organization()
+  {
+    return $this->belongsTo(Organization::class);
+  }
+
   public function getCacheClearableData()
   {
     $baseUrls = [config("app.url")];
+    if (isset($this->organization_id) && !empty($this->organization_id)) {
+      $baseUrls[] = $this->organization()->first()->url;
+    }
     $urls = ['urls' => $baseUrls];
+
     return $urls;
   }
 
