@@ -21,7 +21,7 @@
      class="owl-carousel owl-theme owl-slider-layout-2 {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
     @foreach($slides as $index => $slide)
         @if($slide->active)
-            <div class="card border-0
+            <div data-slide-locatable="{{json_encode($slide->locatableInfo)}}" class="slide card border-0
         {{ $slide->responsive == 2 ? 'owl-d-desktop' : '' }}
             {{ $slide->responsive == 3 ? 'owl-d-mobile' : '' }}">
                 <x-isite::edit-link link="{{$editLink}}{{$slider->id}}/?edit={{$slide->id}}"
