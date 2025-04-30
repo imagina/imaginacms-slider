@@ -4,13 +4,14 @@ namespace Modules\Slider\Entities;
 
 use Astrotomic\Translatable\Translatable;
 use Modules\Core\Icrud\Entities\CrudModel;
+use Modules\Ilocations\Traits\IsLocatable;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 use Modules\Media\Support\Traits\MediaRelation;
 use Modules\Page\Entities\Page;
 
 class Slide extends CrudModel
 {
-  use Translatable, MediaRelation, BelongsToTenant;
+  use Translatable, MediaRelation, BelongsToTenant, IsLocatable;
 
   protected $table = 'slider__slides';
   public $transformer = 'Modules\Slider\Transformers\SlideTransformer';

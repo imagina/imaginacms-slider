@@ -18,6 +18,7 @@
         let isMobile = window.innerWidth <= 767;
         // Filter items based on responsive classes
         slider.find(`.owl-d-${isMobile ? 'desktop' : 'mobile'}`).remove();
+        validateLocatable(slider)
         // Initialize Owl Carousel
         const options = slider.data('slider-options')
         slider.owlCarousel({
@@ -59,6 +60,37 @@
           return !this.classList.contains('owl-loaded'); // Evita el uso de jQuery internamente
         }).each(function () {
           initializeSlider($(this));
+        });
+      }
+
+      function validateLocatable(slider) {
+        // Location-based filtering
+        const sessionCountry = '{{ session()->get('countryIdSelected') }}';
+        const sessionProvince = '{{ session()->get('provinceIdSelected') }}';
+        const sessionCity = '{{ session()->get('cityIdSelected') }}';
+
+        slider.find('.slide').each(function () {
+          const locatableData = $(this).data('slide-locatable');
+          if (locatableData) {
+            try {
+              const {countryId, provinceId, cityId} = locatableData;
+
+              // Skip validation if all location fields are null
+              const allNull = [countryId, provinceId, cityId].every(v => v === null);
+              if (allNull) return;
+
+              const isMatch =
+                (countryId && countryId == sessionCountry) ||
+                (provinceId && provinceId == sessionProvince) ||
+                (cityId && cityId == sessionCity);
+
+              if (!isMatch) $(this).remove();
+
+            } catch (e) {
+              console.error('Invalid JSON in data-slide-locatable:', e);
+              $(this).remove(); // Optionally remove slides with invalid data
+            }
+          }
         });
       }
     </script>

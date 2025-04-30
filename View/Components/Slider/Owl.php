@@ -115,7 +115,7 @@ class Owl extends Component
       'filter' => [
         'sliderId' => $this->slider->id ?? null,
       ],
-      'include' => ['files', 'translations']
+      'include' => ['files', 'translations', 'locatable']
     ];
 
     if($this->central) $params['filter']['withoutTenancy'] = true;

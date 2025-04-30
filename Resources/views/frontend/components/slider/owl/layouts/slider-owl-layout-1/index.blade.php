@@ -20,6 +20,7 @@
 <div id="{{ $slider->system_name }}" data-slider-id="{{$id}}" data-slider-options="{{$dataSliderOptJson}}"
      class="owl-carousel owl-theme owl-slider-layout-1{{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
     @foreach($slides as $index => $slide)
+      <div data-slide-locatable="{{json_encode($slide->locatableInfo)}}" class="slide">
         @if($slide->active)
             @switch($slide->type)
                 @case("video")
@@ -95,6 +96,7 @@
                 @break
             @endswitch
         @endif
+      </div>
     @endforeach
 </div>
 @include("slider::frontend.components.slider.owl.script")

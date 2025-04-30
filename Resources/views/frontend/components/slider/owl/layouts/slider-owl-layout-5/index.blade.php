@@ -29,7 +29,7 @@
   <div id="{{ $slider->system_name }}" data-slider-id="{{$id}}" data-slider-options="{{$dataSliderOptJson}}"
        class="owl-carousel owl-theme owl-slider-layout-5 {{ $nav ? ' owl-with-nav carousel-nav-position-'.$navPosition : '' }} {{ $dots ? ' owl-with-dots carousel-indicators-position-'.$dotsPosition.' carousel-indicators-style-'. $dotsStyle: '' }} position-relative">
     @foreach($slides as $index => $slide)
-      <div
+      <div data-slide-locatable="{{json_encode($slide->locatableInfo)}}"
         class="slide {{ $slide->responsive == 2 ? 'owl-d-desktop' : '' }} {{ $slide->responsive == 3 ? 'owl-d-mobile' : '' }}">
         @if(isset($slide->code_ads) && !is_null($slide->code_ads))
           <div class="banner-{{$slide->id}} py-3">
