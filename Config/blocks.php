@@ -68,8 +68,8 @@ return [
                             "options" => $vAttributes["validation"]
                         ]
                     ],
-                    "autoplayTimeOut" => [
-                        "name" => "autoplayTimeOut",
+                    "autoplayTimeout" => [
+                        "name" => "autoplayTimeout",
                         "value" => "5000",
                         "type" => "input",
                         "props" => [
