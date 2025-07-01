@@ -12,6 +12,7 @@ class CacheSliderDecorator extends BaseCacheCrudDecorator implements SliderRepos
         parent::__construct();
         $this->entityName = 'slider.sliders';
         $this->repository = $slider;
+        $this->tags = ['slider.slides'];
     }
 
     public function countAll()
